@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
@@ -22,6 +24,14 @@ class Order
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\OneToMany(mappedBy: 'NumberOfOrder', targetEntity: Enchantillon::class)]
+    private Collection $enchantillons;
+
+    public function __construct()
+    {
+        $this->enchantillons = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +70,36 @@ class Order
     public function setCreatedAt(?\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Enchantillon>
+     */
+    public function getEnchantillons(): Collection
+    {
+        return $this->enchantillons;
+    }
+
+    public function addEnchantillon(Enchantillon $enchantillon): self
+    {
+        if (!$this->enchantillons->contains($enchantillon)) {
+            $this->enchantillons->add($enchantillon);
+            $enchantillon->setNumberOfOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnchantillon(Enchantillon $enchantillon): self
+    {
+        if ($this->enchantillons->removeElement($enchantillon)) {
+            // set the owning side to null (unless already changed)
+            if ($enchantillon->getNumberOfOrder() === $this) {
+                $enchantillon->setNumberOfOrder(null);
+            }
+        }
 
         return $this;
     }

@@ -44,11 +44,15 @@ class Entreprise implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Pdf::class)]
     private Collection $pdfs;
 
+    #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Enchantillon::class)]
+    private Collection $enchantillons;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
         $this->analyses = new ArrayCollection();
         $this->pdfs = new ArrayCollection();
+        $this->enchantillons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,6 +233,36 @@ class Entreprise implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($pdf->getEntreprise() === $this) {
                 $pdf->setEntreprise(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Enchantillon>
+     */
+    public function getEnchantillons(): Collection
+    {
+        return $this->enchantillons;
+    }
+
+    public function addEnchantillon(Enchantillon $enchantillon): self
+    {
+        if (!$this->enchantillons->contains($enchantillon)) {
+            $this->enchantillons->add($enchantillon);
+            $enchantillon->setEntreprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnchantillon(Enchantillon $enchantillon): self
+    {
+        if ($this->enchantillons->removeElement($enchantillon)) {
+            // set the owning side to null (unless already changed)
+            if ($enchantillon->getEntreprise() === $this) {
+                $enchantillon->setEntreprise(null);
             }
         }
 
