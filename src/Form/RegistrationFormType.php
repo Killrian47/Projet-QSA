@@ -29,7 +29,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'qsa-input-form qsa-radius'
                 ]
             ])
             ->add('name', TextType::class, [
@@ -54,7 +54,7 @@ class RegistrationFormType extends AbstractType
 
                     'label' => 'Veuillez saisir un mot de passe :',
                     'attr' => [
-                        'class' => 'd-flex form-control'
+                        'class' => 'd-flex qsa-input-form rounded'
                     ],
 
                 ],
@@ -64,7 +64,7 @@ class RegistrationFormType extends AbstractType
                         'class' => 'mt-1',
                     ],
                     'attr' => [
-                        'class' => 'form-control',
+                        'class' => 'qsa-input-form ',
                     ],
                 ],
                 // instead of being set onto the object directly,

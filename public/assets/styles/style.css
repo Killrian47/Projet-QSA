@@ -8,13 +8,13 @@
 
 .qsa-btn {
     background-color: #FFDD00 !important;
-    border-color: #FFDD00 !important;
+    border: 2px solid black !important;
     color: black !important;
 }
 
 .qsa-btn:hover {
     background-color: #a28b00 !important;
-    border-color: #a28b00 !important;
+    border: 2px solid #a28b00 !important;
     color: white !important;
 }
 
@@ -27,7 +27,6 @@
 }
 
 .errors ul li {
-
     list-style: none;
     background-color: #f8d7da;
     border: 1px solid #f1aeb5;
