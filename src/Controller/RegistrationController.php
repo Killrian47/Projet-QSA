@@ -23,16 +23,16 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            $user->setPassword($userPasswordHasher->hashPassword($user,$form->get('plainPassword')->getData()));
+            $user->setEmail($form->get('email')->getData());
+            $user->setName($form->get('name')->getData());
+            $user->setFirstConnection(true);
 
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
+
+            $this->addFlash('success', 'Vous venez de vous inscrire avec succès !');
 
             return $this->redirectToRoute('app_login');
         }

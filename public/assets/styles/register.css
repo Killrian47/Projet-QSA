@@ -1,0 +1,20 @@
+.qsa-register-form {
+    padding: 15px;
+    background-color: #D9D9D9;
+}
+
+.qsa-input-form {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #FFDD00;
+    border: 2px solid black;
+}
+
+.qsa-input-form:focus {
+    background-color: #FFFF;
+    transition: background-color .5s ease-in-out;
+}
