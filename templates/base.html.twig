@@ -15,6 +15,10 @@
             crossorigin="anonymous"></script>
     {# Boostrap library #}
 
+    {# My CSS #}
+    <link rel="stylesheet" href="{{ asset('assets/styles/style.css') }}">
+    {# My CSS #}
+
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -24,13 +28,10 @@
     {% endblock %}
 </head>
 <body>
-//    {% block header %}
-//        {% if is_granted('ROLE_ADMIN') %}
-//            {% include '_includes/headerForAdmin.html.twig' %}
-//        {% else %}
-//            {% include '_includes/header.html.twig' %}
-//        {% endif %}
-//    {% endblock %}
+    {% block header %}
+        {% include '_includes/header.html.twig' %}
+        <div class="qsa-fake-header col-12"></div>
+    {% endblock %}
         {% block body %}{% endblock %}
     </body>
 </html>
