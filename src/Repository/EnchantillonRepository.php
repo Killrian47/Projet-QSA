@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Enchantillon;
+use App\Entity\Echantillon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Enchantillon>
+ * @extends ServiceEntityRepository<Echantillon>
  *
- * @method Enchantillon|null find($id, $lockMode = null, $lockVersion = null)
- * @method Enchantillon|null findOneBy(array $criteria, array $orderBy = null)
- * @method Enchantillon[]    findAll()
- * @method Enchantillon[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Echantillon|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Echantillon|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Echantillon[]    findAll()
+ * @method Echantillon[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class EnchantillonRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Enchantillon::class);
+        parent::__construct($registry, Echantillon::class);
     }
 
-    public function save(Enchantillon $entity, bool $flush = false): void
+    public function save(Echantillon $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class EnchantillonRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Enchantillon $entity, bool $flush = false): void
+    public function remove(Echantillon $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class EnchantillonRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Enchantillon[] Returns an array of Enchantillon objects
+//     * @return Echantillon[] Returns an array of Echantillon objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class EnchantillonRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Enchantillon
+//    public function findOneBySomeField($value): ?Echantillon
 //    {
 //        return $this->createQueryBuilder('e')
 //            ->andWhere('e.exampleField = :val')

@@ -22,7 +22,7 @@ class Analyse
     #[ORM\ManyToOne(inversedBy: 'analyses')]
     private ?Entreprise $entreprise = null;
 
-    #[ORM\OneToMany(mappedBy: 'analyse', targetEntity: Enchantillon::class)]
+    #[ORM\OneToMany(mappedBy: 'analyse', targetEntity: Echantillon::class)]
     private Collection $enchantillons;
 
     public function __construct()
@@ -60,14 +60,14 @@ class Analyse
     }
 
     /**
-     * @return Collection<int, Enchantillon>
+     * @return Collection<int, Echantillon>
      */
-    public function getEnchantillons(): Collection
+    public function getEchantillons(): Collection
     {
         return $this->enchantillons;
     }
 
-    public function addEnchantillon(Enchantillon $enchantillon): self
+    public function addEchantillon(Echantillon $enchantillon): self
     {
         if (!$this->enchantillons->contains($enchantillon)) {
             $this->enchantillons->add($enchantillon);
@@ -77,7 +77,7 @@ class Analyse
         return $this;
     }
 
-    public function removeEnchantillon(Enchantillon $enchantillon): self
+    public function removeEchantillon(Echantillon $enchantillon): self
     {
         if ($this->enchantillons->removeElement($enchantillon)) {
             // set the owning side to null (unless already changed)

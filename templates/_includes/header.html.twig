@@ -1,5 +1,5 @@
 <header class="fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-light bg-secondary d-md-none">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white d-md-none">
         <div class="container-fluid">
             <div class="d-flex justify-content-center">
                 <img src="{{ asset('assets/images/LOGO-QSA-CONSEIL.png') }}" class="logo-qsa" alt="Logo QSA">
@@ -13,7 +13,7 @@
                     <ul class="navbar-nav">
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" {# href="home" #}>Bons non
+                                <a class="nav-link" aria-current="page" href="{{ path('app_home') }}">Bons non
                                     exportés</a>
                             </li>
                             <li class="nav-item">
@@ -45,37 +45,37 @@
 
         </div>
     </nav>
-    <div class="d-none d-md-flex justify-content-center pb-2 background-gray">
+    <div class="d-none d-md-flex justify-content-center pb-3 background-gray ">
         <img src="{{ asset('assets/images/LOGO-QSA-CONSEIL.png') }}" class="logo-qsa" alt="Logo QSA">
     </div>
-    {#    <div class="d-none d-md-block qsa-nav-bar"> #}
-    {#        {% if app.user %} #}
-    {#            <ul class="d-flex justify-content-center"> #}
-    {#                {% if is_granted('ROLE_ADMIN') %} #}
-    {#                    <a href="{{ path('app_home') }}" class=" qsa-link-header"> #}
-    {#                        <li class="p-2 qsa-link">Bons non exportés</li> #}
-    {#                    </a> #}
-    {#                    <a href="{{ path('app_admin') }}" class="qsa-link-header"> #}
-    {#                        <li class="p-2 qsa-link">Liste des entreprises</li> #}
-    {#                    </a> #}
-    {#                    <a href="{{ path('app_add_pdf') }}" class=" qsa-link-header"> #}
-    {#                        <li class="p-2 qsa-link">Ajouter PDF audit</li> #}
-    {#                    </a> #}
-    {#                {% else %} #}
-    {#                    <a href="{{ path('app_home') }}" class=" qsa-link-header"> #}
-    {#                        <li class="p-2 qsa-link">Toutes vos analyses</li> #}
-    {#                    </a> #}
-    {#                    <a href="{{ path('app_choose_method') }}" class=" qsa-link-header"> #}
-    {#                        <li class="p-2 qsa-link">Envoyer de nouvelles analyse</li> #}
-    {#                    </a> #}
-    {#                {% endif %} #}
-    {#                <a href="{{ path('app_account') }}" class=" qsa-link-header"> #}
-    {#                    <li class="p-2 qsa-link">Mon compte</li> #}
-    {#                </a> #}
-    {#                <a href="{{ path('app_logout') }}" class=" qsa-link-header"> #}
-    {#                    <li class="p-2 qsa-link">Se déconnecter</li> #}
-    {#                </a> #}
-    {#            </ul> #}
-    {#        {% endif %} #}
-    {#    </div> #}
+    <div class="d-none d-md-block qsa-nav-bar background-gray ">
+        {% if app.user %}
+            <ul class="d-flex justify-content-center">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_home') }}" class="qsa-link-header">
+                        <li class="p-2 qsa-link">Bons non exportés</li>
+                    </a>
+                    <a href="{{ path('app_home') }}" class="qsa-link-header qsa-link-header-1">
+                        <li class="p-2 qsa-link">Liste des entreprises</li>
+                    </a>
+                    <a href="{{ path('app_home') }}" class=" qsa-link-header qsa-link-header-1">
+                        <li class="p-2 qsa-link">Ajouter PDF audit</li>
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_home') }}" class="qsa-link-header">
+                        <li class="p-2 qsa-link">Toutes vos analyses</li>
+                    </a>
+                    <a href="{# {{ path('app_choose_method') }} #}" class="qsa-link-header qsa-link-header-1">
+                        <li class="p-2 qsa-link">Envoyer de nouvelles analyse</li>
+                    </a>
+                {% endif %}
+                <a href="{# {{ path('app_account') }} #}" class="qsa-link-header qsa-link-header-1">
+                    <li class="p-2 qsa-link">Mon compte</li>
+                </a>
+                <a href="{{ path('app_logout') }}" class="qsa-link-header">
+                    <li class="p-2 qsa-link">Se déconnecter</li>
+                </a>
+            </ul>
+        {% endif %}
+    </div>
 </header>

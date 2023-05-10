@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="blocks-container">
+        {% if orders is not empty %}
+            {% for order in orders %}
+                {% set counterForEchantillon = 0 %}
+
+                {% for echantillon in order.echantillons.toArray %}
+                    {% set counterForEchantillon = counterForEchantillon + 1 %}
+                {% endfor %}
+
+                <div class="block-container mb-3 mt-2 qsa-radius">
+                    <p>Numéro du bon de commande : <strong>{{ order.id }}</strong></p>
+
+                    <p>Vous avez envoyé <strong>{{ counterForEchantillon }}</strong> échantillons</p>
+                    <p>A été récupéré par QSA ? {% if order.isExported == 0 %}
+                            Non
+                        {% else %}
+                            Oui
+                        {% endif %}</p>
+                    <p>Vous avez créé ce bon de commande le : <br><strong>{{ order.createdAt | date('d-m-Y') }}</strong>
+                    </p>
+                    {#                        <a href="{{ path('app_details_order', { id : order.id}) }}">Voir plus de détails</a> #}
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2 class="text-center mt-5">Vous n'avez pas encore créé de bon de commande !</h2>
+        {% endif %}
+    </div>
+{% endblock %}
