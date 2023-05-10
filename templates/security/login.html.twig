@@ -13,10 +13,10 @@
                 {% endif %}
 
                 <label for="inputEmail">Veuillez saisir votre adresse mail :</label>
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="qsa-input-form rounded"
                        autocomplete="email" required autofocus>
                 <label for="inputPassword">Veuillez saisir votre mot de passe :</label>
-                <input type="password" name="password" id="inputPassword" class="form-control"
+                <input type="password" name="password" id="inputPassword" class="qsa-input-form qsa-radius"
                        autocomplete="current-password" >
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
