@@ -1,6 +1,12 @@
 @import "header.css";
 @import "login.css";
 @import "register.css";
+@import "home.css";
+
+li {
+    list-style: none;
+    text-decoration: none;
+}
 
 .background-gray {
     background-color: #dee2e6;

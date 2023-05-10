@@ -46,7 +46,7 @@ class Entreprise implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Pdf::class)]
     private Collection $pdfs;
 
-    #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Enchantillon::class)]
+    #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Echantillon::class)]
     private Collection $enchantillons;
 
     public function __construct()
@@ -242,14 +242,14 @@ class Entreprise implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Enchantillon>
+     * @return Collection<int, Echantillon>
      */
     public function getEnchantillons(): Collection
     {
         return $this->enchantillons;
     }
 
-    public function addEnchantillon(Enchantillon $enchantillon): self
+    public function addEnchantillon(Echantillon $enchantillon): self
     {
         if (!$this->enchantillons->contains($enchantillon)) {
             $this->enchantillons->add($enchantillon);
@@ -259,7 +259,7 @@ class Entreprise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeEnchantillon(Enchantillon $enchantillon): self
+    public function removeEnchantillon(Echantillon $enchantillon): self
     {
         if ($this->enchantillons->removeElement($enchantillon)) {
             // set the owning side to null (unless already changed)

@@ -25,7 +25,7 @@ class Order
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'NumberOfOrder', targetEntity: Enchantillon::class)]
+    #[ORM\OneToMany(mappedBy: 'NumberOfOrder', targetEntity: Echantillon::class)]
     private Collection $enchantillons;
 
     public function __construct()
@@ -75,14 +75,14 @@ class Order
     }
 
     /**
-     * @return Collection<int, Enchantillon>
+     * @return Collection<int, Echantillon>
      */
-    public function getEnchantillons(): Collection
+    public function getEchantillons(): Collection
     {
         return $this->enchantillons;
     }
 
-    public function addEnchantillon(Enchantillon $enchantillon): self
+    public function addEchantillon(Echantillon $enchantillon): self
     {
         if (!$this->enchantillons->contains($enchantillon)) {
             $this->enchantillons->add($enchantillon);
@@ -92,7 +92,7 @@ class Order
         return $this;
     }
 
-    public function removeEnchantillon(Enchantillon $enchantillon): self
+    public function removeEchantillon(Echantillon $enchantillon): self
     {
         if ($this->enchantillons->removeElement($enchantillon)) {
             // set the owning side to null (unless already changed)

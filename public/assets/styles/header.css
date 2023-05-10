@@ -5,5 +5,36 @@
 }
 
 .qsa-fake-header {
-    height: 175px;
+    height: 200px;
+}
+
+.qsa-link-header {
+    background: #FFDD00;
+    text-decoration: none;
+    color: black;
+}
+
+.qsa-link-header:first-child {
+    border-top-left-radius: 10px;
+    border: 2px solid black ;
+}
+
+.qsa-link-header:last-child {
+    border-top-right-radius: 10px;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.qsa-link-header-1 {
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.qsa-link-header:hover {
+    background-color: #a28b00;
+    border-color: #a28b00;
+    color: white;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
 }

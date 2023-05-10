@@ -7,17 +7,17 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EnchantillonRepository::class)]
-class Enchantillon
+class Echantillon
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'enchantillons')]
+    #[ORM\ManyToOne(inversedBy: 'echantillons')]
     private ?Entreprise $entreprise = null;
 
-    #[ORM\ManyToOne(inversedBy: 'enchantillons')]
+    #[ORM\ManyToOne(inversedBy: 'echantillons')]
     private ?Order $NumberOfOrder = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
