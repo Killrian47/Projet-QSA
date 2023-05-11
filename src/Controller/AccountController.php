@@ -12,7 +12,7 @@ class AccountController extends AbstractController
     public function index(): Response
     {
         if ($this->getUser() === null) {
-            $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('account/index.html.twig', [
