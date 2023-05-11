@@ -43,3 +43,7 @@ li {
     /*text-align: center;*/
     padding: 1rem;
 }
+
+.qsa-border {
+    border: 5px solid #FFDD00;
+}

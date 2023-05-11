@@ -3,3 +3,7 @@
     padding: 20px;
 }
 
+.qsa-input-form-disabled {
+    background-color: rgba(75, 75, 75, 0.53);
+    color: white;
+}
