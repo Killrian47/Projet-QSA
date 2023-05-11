@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="account-container col-11 col-md-8 col-lg-5 mt-5 qsa-radius">
+                <h3 class="mt-2 text-center">Vos informations personnelles </h3>
+                <div class="mt-3">
+                    <p>Le nom de votre entreprise : {{ app.user.name }}</p>
+                    <p>L'adresse mail qui vous sert à vous connecter : {{ app.user.email }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
