@@ -3,6 +3,11 @@
 {% block title %}Accueil - {{ parent() }}{% endblock %}
 
 {% block body %}
+
+    <div class="mb-3 d-flex justify-content-center">
+        {% include '_includes/buttonDeleteEmptyOrder.html.twig' %}
+    </div>
+
     <div class="blocks-container">
         {% if orders is not empty %}
             {% for order in orders %}
