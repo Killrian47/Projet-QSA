@@ -2,20 +2,54 @@
 
 namespace App\Controller;
 
+use App\Entity\Echantillon;
+use App\Entity\Order;
+use App\Form\AddEchantillonOneByOneType;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class OrderController extends AbstractController
 {
-    #[Route('/order', name: 'app_order')]
-    public function index(): Response
+    #[Route('/ajouter-des-échantillons-un-par-un', name: 'app_order')]
+    public function index(EntityManagerInterface $manager): Response
     {
-        return $this->render('order/index.html.twig', [
-            'controller_name' => 'OrderController',
+        if ($this->getUser() === null) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($this->getUser()->isFirstConnection() === true) {
+            $this->addFlash('warning', 'Vous devez changer votre mot de passe avant de pouvoir naviguer sur le site');
+            return $this->redirectToRoute('app_change_password');
+        }
+
+        date_default_timezone_set('Europe/Paris');
+        $order = new Order();
+        $order->setEntreprise($this->getUser());
+        $order->setCreatedAt(new \DateTimeImmutable('now'));
+        $order->setIsExported(false);
+
+        $manager->persist($order);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_add_echantillon_to_order', [
+            'id' => $order->getId()
+        ]);
+    }
+
+    #[Route('/ajouter-des-échantillons-un-par-un/{id}', name: 'app_add_echantillon_to_order')]
+    public function addEchantillonsOneByOne(Request $request, Order $order, EntityManagerInterface $manager)
+    {
+        $echantillon = new Echantillon();
+        $form = $this->createForm(AddEchantillonOneByOneType::class);
+        $form->handleRequest($request);
+
+        return $this->render('echantillon/addOneByOne.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 
