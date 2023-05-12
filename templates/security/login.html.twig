@@ -13,14 +13,19 @@
                 {% endif %}
 
                 <label for="inputEmail">Veuillez saisir votre adresse mail :</label>
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="qsa-input-form rounded"
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                       class="qsa-input-form rounded"
                        autocomplete="email" required autofocus>
                 <label for="inputPassword">Veuillez saisir votre mot de passe :</label>
                 <input type="password" name="password" id="inputPassword" class="qsa-input-form rounded"
-                       autocomplete="current-password" >
+                       autocomplete="current-password">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                <p class="mt-2 mb-0">Votre entreprise n'est pas encore inscrite ? Cliquez <a href="{{ path('app_register') }}">ici</a></p>
+                <div class="d-flex flex-column">
+                    <p class="mt-2 mb-0">Votre entreprise n'est pas encore inscrite ? Cliquez <a
+                                href="{{ path('app_register') }}">ici</a></p>
+                    <p><i><a href="{{ path('app_reset_password_request') }}">Mot de passe oublié</a></i></p>
+                </div>
 
                 <button class="btn qsa-btn mt-3" type="submit">Se connecter</button>
             </div>
