@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="detail-order-container w-75 mx-auto background-gray qsa-radius">
-        <h1 class="text-center mb-3">Numéro de commande {{ order.id }}</h1>
+        <h1 class="text-center mb-3">Bon de commande numéro {{ order.id }}</h1>
         <p class="text-end me-3"><a href="{{ path('app_home') }}">Retour à l'accueil</a></p>
 
         <table class="table qsa-border qsa-table">
@@ -36,19 +36,19 @@
                 <p class="ms-2 p-2"><a href="{{ path('app_add_missing_echantillon_to_order', {'id': order.id}) }}">Ajouter un échantillon
                         manquant</a></p>
             {% endif %}
-{#            {% if is_granted('ROLE_ADMIN') %}#}
-{#                <a class="btn btn-primary" href="{{ path('export_order', {'id': order.id}) }}">Exporter les échantillons#}
-{#                    en#}
-{#                    XLSX</a>#}
-{#            {% endif %}#}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn qsa-btn ms-2 mb-3" href="{{ path('app_export_in_csv', {'id': order.id}) }}">Exporter les échantillons
+                    en
+                    XLSX</a>
+            {% endif %}
         {% else %}
         {% endif %}
-{#        {% if is_granted('ROLE_ADMIN') %}#}
-{#            {% if order.isExported == 1 %}#}
-{#                <a class="btn qsa-btn" href="{{ path('export_order', { id : order.id}) }}">Exporter à nouveau le bon de#}
-{#                    commande</a>#}
-{#            {% endif %}#}
-{#        {% endif %}#}
+        {% if is_granted('ROLE_ADMIN') %}
+            {% if order.isExported == 1 %}
+                <a class="btn qsa-btn ms-2 mb-3" href="{{ path('app_export_in_csv', { id : order.id}) }}">Exporter à nouveau le bon de
+                    commande</a>
+            {% endif %}
+        {% endif %}
     </div>
 
 {% endblock %}
