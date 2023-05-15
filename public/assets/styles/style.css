@@ -51,3 +51,8 @@ li {
 .qsa-border {
     border: 5px solid #FFDD00;
 }
+
+.footer-space-div {
+    height: 50px;
+    width: 100%;
+}

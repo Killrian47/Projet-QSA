@@ -88,7 +88,7 @@ class OrderController extends AbstractController
         ]);
     }
 
-    #[Route('/bon-de-commande/supprimer-ceux-qui-sont-vides', name: 'app_delete_empty_order')]
+    #[Route('/admin/supprimer-ceux-qui-sont-vides', name: 'app_delete_empty_order')]
     #[IsGranted('ROLE_ADMIN')]
     public function deleteEmptyOrder(OrderRepository $orderRepository, EntityManagerInterface $manager): Response
     {
