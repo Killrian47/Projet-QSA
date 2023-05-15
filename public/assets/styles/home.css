@@ -11,3 +11,10 @@
     padding: 10px;
     background: #DEE2E6;
 }
+
+.sep {
+    width: 100%;
+    color: black;
+    font-size: 2rem;
+    opacity: 0.5;
+}
