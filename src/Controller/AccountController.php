@@ -23,7 +23,13 @@ class AccountController extends AbstractController
     public function index(): Response
     {
         if ($this->getUser() === null) {
+            $this->addFlash('info', 'Vous devez être connecté pour avoir accès à cette page');
             return $this->redirectToRoute('app_login');
+        }
+
+        if ($this->getUser()->isFirstConnection() === true) {
+            $this->addFlash('warning', 'Vous devez changer votre mot de passe avant de pouvoir naviguer sur le site ');
+            return $this->redirectToRoute('app_change_password');
         }
 
         return $this->render('account/index.html.twig', [
@@ -34,6 +40,16 @@ class AccountController extends AbstractController
     #[Route('/mon-compte/changer-mon-mot-de-passe', name: 'app_change_password')]
     public function changePassword(Request $request, UserPasswordHasherInterface $hasher)
     {
+        if ($this->getUser() === null) {
+            $this->addFlash('info', 'Vous devez être connecté pour avoir accès à cette page');
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($this->getUser()->isFirstConnection() === true) {
+            $this->addFlash('warning', 'Vous devez changer votre mot de passe avant de pouvoir naviguer sur le site ');
+            return $this->redirectToRoute('app_change_password');
+        }
+
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);
         $form->handleRequest($request);
