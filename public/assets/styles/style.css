@@ -3,6 +3,7 @@
 @import "register.css";
 @import "home.css";
 @import "account.css";
+@import "echantillon.css";
 
 li {
     list-style: none;

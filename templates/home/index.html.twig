@@ -4,12 +4,14 @@
 
 {% block body %}
 
-    <div class="mb-3 d-flex justify-content-center">
-        {% include '_includes/buttonDeleteEmptyOrder.html.twig' %}
-    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="mb-3 d-flex justify-content-center">
+            {% include '_includes/buttonDeleteEmptyOrder.html.twig' %}
+        </div>
+    {% endif %}
 
-    <div class="blocks-container">
-        {% if orders is not empty %}
+    {% if orders is not empty %}
+        <div class="blocks-container">
             {% for order in orders %}
                 {% set counterForEchantillon = 0 %}
 
@@ -31,8 +33,8 @@
                     {#                        <a href="{{ path('app_details_order', { id : order.id}) }}">Voir plus de détails</a> #}
                 </div>
             {% endfor %}
-        {% else %}
-            <h2 class="text-center mt-5">Vous n'avez pas encore créé de bon de commande !</h2>
-        {% endif %}
-    </div>
+        </div>
+    {% else %}
+        <h2 class="text-center mt-5">Vous n'avez pas encore créé de bon de commande !</h2>
+    {% endif %}
 {% endblock %}
