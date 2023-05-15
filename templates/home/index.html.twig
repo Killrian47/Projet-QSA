@@ -3,38 +3,63 @@
 {% block title %}Accueil - {{ parent() }}{% endblock %}
 
 {% block body %}
+    <div class="blocks-container">
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-12 d-flex justify-content-center ">
+                {% include '_includes/buttonDeleteEmptyOrder.html.twig' %}
+            </div>
+            <div class="col-12">
+                <h2 class="mt-2 text-center">Bons de commandes non exportés </h2>
+                <hr class="sep">
+            </div>
+            {% for order in adminView %}
+                {% set countEchantillonsForAdmin = 0 %}
 
-    {% if is_granted('ROLE_ADMIN') %}
-        <div class="mb-3 d-flex justify-content-center">
-            {% include '_includes/buttonDeleteEmptyOrder.html.twig' %}
-        </div>
-    {% endif %}
-
-    {% if orders is not empty %}
-        <div class="blocks-container">
-            {% for order in orders %}
-                {% set counterForEchantillon = 0 %}
-
-                {% for echantillon in order.echantillons.toArray %}
-                    {% set counterForEchantillon = counterForEchantillon + 1 %}
+                {% for echantillons in order.echantillons.toArray %}
+                    {% set countEchantillonsForAdmin = countEchantillonsForAdmin + 1 %}
                 {% endfor %}
+                {% if countEchantillonsForAdmin == 0 %}
 
-                <div class="block-container mb-3 mt-2 qsa-radius qsa-border">
-                    <p>Numéro du bon de commande : <strong>{{ order.id }}</strong></p>
+                {% else %}
+                    {% if order.isExported != 1 %}
+                        <div class="block-container mb-3 mt-2 qsa-border qsa-radius">
+                            <p>Bon de commande créé par l'entreprise <strong>{{ order.entreprise.name }}</strong> le
+                                <strong>{{ order.createdAt | date('d-m-Y') }}</strong></p>
+                            <p>Numéro du bon de commande : <strong>{{ order.id }}</strong></p>
 
-                    <p>Vous avez envoyé <strong>{{ counterForEchantillon }}</strong> échantillons</p>
-                    <p>A été récupéré par QSA ? {% if order.isExported == 0 %}
-                            Non
-                        {% else %}
-                            Oui
-                        {% endif %}</p>
-                    <p>Vous avez créé ce bon de commande le : <br><strong>{{ order.createdAt | date('d-m-Y') }}</strong>
-                    </p>
-                    {#                        <a href="{{ path('app_details_order', { id : order.id}) }}">Voir plus de détails</a> #}
-                </div>
+                            <p>Il y a {{ countEchantillonsForAdmin }} échantillons</p>
+                            {#                    <a href="{{ path('app_details_order', { id : order.id}) }}">Voir plus de détails</a> #}
+                        </div>
+                    {% endif %}
+                {% endif %}
             {% endfor %}
-        </div>
-    {% else %}
-        <h2 class="text-center mt-5">Vous n'avez pas encore créé de bon de commande !</h2>
-    {% endif %}
+        {% else %}
+            {% if orders is not empty %}
+                {% for order in orders %}
+                    {% set counterForEchantillon = 0 %}
+
+                    {% for echantillon in order.echantillons.toArray %}
+                        {% set counterForEchantillon = counterForEchantillon + 1 %}
+                    {% endfor %}
+
+                    <div class="block-container mb-3 mt-2 qsa-radius qsa-border">
+                        <p>Numéro du bon de commande : <strong>{{ order.id }}</strong></p>
+
+                        <p>Vous avez envoyé <strong>{{ counterForEchantillon }}</strong> échantillons</p>
+                        <p>A été récupéré par QSA ? {% if order.isExported == 0 %}
+                                Non
+                            {% else %}
+                                Oui
+                            {% endif %}</p>
+                        <p>Vous avez créé ce bon de commande le :
+                            <br><strong>{{ order.createdAt | date('d-m-Y') }}</strong>
+                        </p>
+                        {#                        <a href="{{ path('app_details_order', { id : order.id}) }}">Voir plus de détails</a> #}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2 class="text-center mt-5">Vous n'avez pas encore créé de bon de commande !</h2>
+            {% endif %}
+        {% endif %}
+    </div>
 {% endblock %}
