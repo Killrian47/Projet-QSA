@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du bon de commande N°{{ order.id }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="detail-order-container w-75 mx-auto background-gray qsa-radius">
+        <h1 class="text-center mb-3">Numéro de commande {{ order.id }}</h1>
+        <p class="text-end me-3"><a href="{{ path('app_home') }}">Retour à l'accueil</a></p>
+
+        <table class="table qsa-border qsa-table">
+            <thead>
+            <tr>
+                <th scope="col">Numéro de lot</th>
+                <th scope="col">Nom du produit</th>
+                <th scope="col">Nom du fournisseur</th>
+                <th scope="col">Température du produit</th>
+                <th scope="col">Température de l'enceinte</th>
+                <th scope="col" class="text-center">#</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for echantillon in echantillons %}
+                <tr>
+                    <td>{{ echantillon.numberOfBatch }}</td>
+                    <td>{{ echantillon.productName }}</td>
+                    <td>{{ echantillon.supplier }}</td>
+                    <td>{{ echantillon.temperatureOfProduct }}</td>
+                    <td>{{ echantillon.temperatureOfEnceinte }}</td>
+                    <td class="text-center"><a href="">Détails échantillon</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if order.isExported == 0 %}
+            {% if app.user.id == order.entreprise.id %}
+                <p class="ms-2 p-2"><a href="{{ path('app_add_missing_echantillon_to_order', {'id': order.id}) }}">Ajouter un échantillon
+                        manquant</a></p>
+            {% endif %}
+{#            {% if is_granted('ROLE_ADMIN') %}#}
+{#                <a class="btn btn-primary" href="{{ path('export_order', {'id': order.id}) }}">Exporter les échantillons#}
+{#                    en#}
+{#                    XLSX</a>#}
+{#            {% endif %}#}
+        {% else %}
+        {% endif %}
+{#        {% if is_granted('ROLE_ADMIN') %}#}
+{#            {% if order.isExported == 1 %}#}
+{#                <a class="btn qsa-btn" href="{{ path('export_order', { id : order.id}) }}">Exporter à nouveau le bon de#}
+{#                    commande</a>#}
+{#            {% endif %}#}
+{#        {% endif %}#}
+    </div>
+
+{% endblock %}

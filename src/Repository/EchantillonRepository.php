@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Echantillon[]    findAll()
  * @method Echantillon[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EnchantillonRepository extends ServiceEntityRepository
+class EchantillonRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
