@@ -1,12 +1,170 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Ajouter un échantillon - {{ parent() }}{% endblock %}
+
 {% block body %}
     <div class="form-add-echantillon">
-        {{ form(form) }}
+        {{ form_start(form) }}
+
+        {# Nom du produit #}
+        <div class="mb-2">
+            {{ form_label(form.productName) }}
+            <div class="errors mt-2">
+                {{ form_errors(form.productName) }}
+            </div>
+            {{ form_widget(form.productName) }}
+        </div>
+        {# Nom du produit #}
+
+        <div class="d-flex justify-content-between">
+            {# N° de lot #}
+            <div class="mb-2 w-45">
+                {{ form_label(form.numberOfBatch) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.numberOfBatch) }}
+                </div>
+                {{ form_widget(form.numberOfBatch) }}
+            </div>
+            {# N° de lot #}
+            {# Fabricant #}
+            <div class="mb-2 w-45">
+                {{ form_label(form.supplier) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.supplier) }}
+                </div>
+                {{ form_widget(form.supplier) }}
+            </div>
+            {# Fabricant #}
+        </div>
+
+        <div class="d-flex justify-content-between">
+            {# Température du porduit #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.temperatureOfProduct) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.temperatureOfProduct) }}
+                </div>
+                {{ form_widget(form.temperatureOfProduct) }}
+            </div>
+            {# Température du produit #}
+            {# Température de l'enceinte #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.temperatureOfEnceinte) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.temperatureOfEnceinte) }}
+                </div>
+                {{ form_widget(form.temperatureOfEnceinte) }}
+            </div>
+            {# Température de l'enceinte #}
+            <div class="d-flex flex-column w-30">
+                {# Analyse à DLC #}
+                <div class="mb-3 d-flex align-items-center ">
+                    {{ form_label(form.analyseDlc) }}
+                    {{ form_widget(form.analyseDlc) }}
+                </div>
+                {# Analyse à DLC #}
+                {# Validation de DLC #}
+                <div class="mb-2 d-flex align-items-center ">
+                    {{ form_label(form.validationDlc) }}
+                    {{ form_widget(form.validationDlc) }}
+                </div>
+                {# Validation de DLC #}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            {# Date de fabrication #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.dateOfManufacturing) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.dateOfManufacturing) }}
+                </div>
+                {{ form_widget(form.dateOfManufacturing) }}
+            </div>
+            {# Date de fabrication #}
+            {# DLC / DLUO #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.DlcOrDluo) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.DlcOrDluo) }}
+                </div>
+                {{ form_widget(form.DlcOrDluo) }}
+            </div>
+            {# DLC / DLUO #}
+            {# Date de prélèvement #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.dateOfSampling) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.dateOfSampling) }}
+                </div>
+                {{ form_widget(form.dateOfSampling) }}
+            </div>
+            {# Date de prélèvement #}
+        </div>
+
+        <div class="d-flex justify-content-between">
+            {# Conditionnement #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.conditioning) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.conditioning) }}
+                </div>
+                {{ form_widget(form.conditioning) }}
+            </div>
+            {# Conditionnement #}
+            {# Etat physique #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.etatPhysique) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.etatPhysique) }}
+                </div>
+                {{ form_widget(form.etatPhysique) }}
+            </div>
+            {# Etat physique #}
+            {# Lieu #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.Lieu) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.Lieu) }}
+                </div>
+                {{ form_widget(form.Lieu) }}
+            </div>
+            {# Lieu #}
+        </div>
+
+
+        <div class="d-flex justify-content-between">
+            {# Stockage #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.stockage) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.stockage) }}
+                </div>
+                {{ form_widget(form.stockage) }}
+            </div>
+            {# Stockage #}
+            {# Analyse #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.analyse) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.analyse) }}
+                </div>
+                {{ form_widget(form.analyse) }}
+            </div>
+            {# Analyse #}
+            {# Prélevè par #}
+            <div class="mb-2 w-30">
+                {{ form_label(form.samplingBy) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.samplingBy) }}
+                </div>
+                {{ form_widget(form.samplingBy) }}
+            </div>
+            {# Prélevé par #}
+        </div>
+
+
+        {{ form_end(form) }}
     </div>
-{% endblock %}
-
-{% block title %}
-
 {% endblock %}
 
