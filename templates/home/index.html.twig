@@ -4,7 +4,6 @@
 
 {% block body %}
     <div class="blocks-container">
-
         {% if is_granted('ROLE_ADMIN') %}
             <div class="col-12 d-flex justify-content-center ">
                 {% include '_includes/buttonDeleteEmptyOrder.html.twig' %}

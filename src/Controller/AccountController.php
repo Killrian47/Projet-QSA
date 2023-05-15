@@ -45,11 +45,6 @@ class AccountController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        if ($this->getUser()->isFirstConnection() === true) {
-            $this->addFlash('warning', 'Vous devez changer votre mot de passe avant de pouvoir naviguer sur le site ');
-            return $this->redirectToRoute('app_change_password');
-        }
-
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);
         $form->handleRequest($request);
@@ -64,6 +59,7 @@ class AccountController extends AbstractController
 
                 $this->entityManager->flush();
                 $this->addFlash('success', 'Votre mot de passe vient d\'être modifié avec succès !');
+                return $this->redirectToRoute('app_home');
             } else {
                 $this->addFlash('danger', 'Votre mot de passe actuel n\'est pas le bon, veuillez réessayer avec votre bon mot de passe ');
             }
