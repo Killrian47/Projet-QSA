@@ -1,5 +1,6 @@
 .idea
 public/upload
+public/file_to_download
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
