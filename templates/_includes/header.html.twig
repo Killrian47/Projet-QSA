@@ -21,7 +21,7 @@
                                     entreprises</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" {# href="{{ path('app_add_pdf') }}" #}>Ajouter rapport d'audit</a>
+                                <a class="nav-link" href="{{ path('app_add_pdf') }}" >Ajouter rapport d'audit</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
@@ -58,7 +58,7 @@
                     <a href="{{ path('app_home') }}" class="qsa-link-header qsa-link-header-1">
                         <li class="p-2 qsa-link">Liste des entreprises</li>
                     </a>
-                    <a href="{{ path('app_home') }}" class=" qsa-link-header qsa-link-header-1">
+                    <a href="{{ path('app_add_pdf') }}" class=" qsa-link-header qsa-link-header-1">
                         <li class="p-2 qsa-link">Ajouter PDF audit</li>
                     </a>
                 {% else %}

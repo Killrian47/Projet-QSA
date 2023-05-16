@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ChangePasswordType;
+use App\Repository\PdfRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,7 @@ class AccountController extends AbstractController
     }
 
     #[Route('/mon-compte', name: 'app_account')]
-    public function index(): Response
+    public function index(PdfRepository $pdfRepository): Response
     {
         if ($this->getUser() === null) {
             $this->addFlash('info', 'Vous devez être connecté pour avoir accès à cette page');
@@ -32,8 +33,10 @@ class AccountController extends AbstractController
             return $this->redirectToRoute('app_change_password');
         }
 
+        $pdf = $pdfRepository->findBy(['entreprise' => $this->getUser()], ['createdAt' => 'DESC']);
+
         return $this->render('account/index.html.twig', [
-            'controller_name' => 'AccountController',
+            'pdf' => $pdf,
         ]);
     }
 
@@ -64,6 +67,7 @@ class AccountController extends AbstractController
                 $this->addFlash('danger', 'Votre mot de passe actuel n\'est pas le bon, veuillez réessayer avec votre bon mot de passe ');
             }
         }
+
 
         return $this->render('account/change_password.html.twig', [
             'form' => $form->createView(),

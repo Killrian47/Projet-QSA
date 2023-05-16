@@ -4,15 +4,42 @@
 
 {% block body %}
     {% if app.user %}
-        <div class="d-flex justify-content-center align-items-center">
-            <div class="account-container col-11 col-md-8 col-lg-5 mt-5 qsa-radius qsa-border">
-                <h3 class="mt-2 text-center">Vos informations personnelles </h3>
-                <div class="mt-3">
-                    <p>Le nom de votre entreprise : {{ app.user.name }}</p>
-                    <p>L'adresse mail qui vous sert à vous connecter : {{ app.user.email }}</p>
-                    <div>
-                        <a href="{{ path('app_change_password') }}">Changer mon mot de passe</a>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="col-11 col-md-8 col-lg-5 mt-5 account-container qsa-radius qsa-border">
+                <div>
+                    <h3 class="mt-2 text-center">Vos informations personnelles </h3>
+                    <div class="mt-3">
+                        <p>Le nom de votre entreprise : {{ app.user.name }}</p>
+                        <p>L'adresse mail qui vous sert à vous connecter : {{ app.user.email }}</p>
+                        <div>
+                            <a href="{{ path('app_change_password') }}">Changer mon mot de passe</a>
+                        </div>
                     </div>
+                </div>
+                <div class="mt-3">
+                    {% set fileNotChecked = [] %}
+                    {% for file in pdf %}
+                        {% if file.isChecked == 0 %}
+                            {% set fileNotChecked = fileNotChecked|merge([file]) %}
+                        {% endif %}
+                    {% endfor %}
+                    <h3 class="text-center mb-3">Vos documents </h3>
+                    {% if fileNotChecked is not empty %}
+                        <h5>Vos nouveaux documents :</h5>
+                        {% for file in fileNotChecked %}
+                            <p><a href="{{ path('app_pdf', { slug : file.slug}) }}" target="_blank">{{ file.slug }}</a>
+                                ajouté
+                                le {{ file.createdAt | date('d-m-Y') }}</p><br>
+                        {% endfor %}
+                    {% endif %}
+                    <h5>Vos anciens documents :</h5>
+                    {% for file in pdf %}
+                        {% if file.isChecked == 1 %}
+                            <p><a href="{{ path('app_pdf', { slug : file.slug}) }}" target="_blank">{{ file.slug }}</a>
+                                ajouté
+                                le {{ file.createdAt | date('d-m-Y') }}</p><br>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
