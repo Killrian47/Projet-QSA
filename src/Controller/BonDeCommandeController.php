@@ -63,6 +63,7 @@ class BonDeCommandeController extends AbstractController
             $echantillon->setDateOfManufacturing($form->get('dateOfManufacturing')->getData());
             $echantillon->setDlcOrDluo($form->get('DlcOrDluo')->getData());
             $echantillon->setDateOfSampling($form->get('dateOfSampling')->getData());
+            $echantillon->setDateAnalyse($form->getData()['dateAnalyse']);
             $echantillon->setAnalyseDlc($form->get('analyseDlc')->getData());
             $echantillon->setValidationDlc($form->get('validationDlc')->getData());
             $echantillon->setConditioning($form->get('conditioning')->getData());
@@ -73,9 +74,17 @@ class BonDeCommandeController extends AbstractController
             $echantillon->setSamplingBy($form->get('samplingBy')->getData());
             $dateF = $form->get('dateOfManufacturing')->getData();
             $dateDlc = $form->get('DlcOrDluo')->getData();
+            $dateAnalyse = $form->getData()['dateAnalyse'];
 
             if ($dateDlc < $dateF) {
                 $this->addFlash('danger', 'La date de DLC ne peut pas être plus ancienne que la date de fabrication');
+                return $this->redirectToRoute('app_detail_order', [
+                    'id' => $order->getId()
+                ]);
+            }
+
+            if ($dateAnalyse < $dateF) {
+                $this->addFlash('danger', 'La date d\'analyse ne peut pas être plus ancienne que la date de fabrication');
                 return $this->redirectToRoute('app_detail_order', [
                     'id' => $order->getId()
                 ]);

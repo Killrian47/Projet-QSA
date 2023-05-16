@@ -65,6 +65,7 @@ class OrderController extends AbstractController
             $echantillon->setDateOfManufacturing($form->get('dateOfManufacturing')->getData());
             $echantillon->setDlcOrDluo($form->get('DlcOrDluo')->getData());
             $echantillon->setDateOfSampling($form->get('dateOfSampling')->getData());
+            $echantillon->setDateAnalyse($form->getData()['dateAnalyse']);
             $echantillon->setAnalyseDlc($form->get('analyseDlc')->getData());
             $echantillon->setValidationDlc($form->get('validationDlc')->getData());
             $echantillon->setConditioning($form->get('conditioning')->getData());
@@ -75,6 +76,7 @@ class OrderController extends AbstractController
             $echantillon->setSamplingBy($form->get('samplingBy')->getData());
             $dateF = $form->get('dateOfManufacturing')->getData();
             $dateDlc = $form->get('DlcOrDluo')->getData();
+            $dateAnalyse = $form->get('dateAnalyse')->getData();
 
             if ($dateDlc < $dateF) {
                 $this->addFlash('danger', 'La date de DLC ne peut pas être plus ancienne que la date de fabrication');
@@ -83,7 +85,14 @@ class OrderController extends AbstractController
                 ]);
             }
 
-                $manager->persist($echantillon);
+            if ($dateAnalyse < $dateF) {
+                $this->addFlash('danger', 'La date d\'analyse ne peut pas être plus ancienne que la date de fabrication');
+                return $this->redirectToRoute('app_detail_order', [
+                    'id' => $order->getId()
+                ]);
+            }
+
+            $manager->persist($echantillon);
             $manager->flush();
 
             $this->addFlash('success', 'L\'échantillon vient d\'être enregistré !');
