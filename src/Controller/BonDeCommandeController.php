@@ -71,6 +71,15 @@ class BonDeCommandeController extends AbstractController
             $echantillon->setStockage($form->get('stockage')->getData());
             $echantillon->setAnalyse($form->get('analyse')->getData());
             $echantillon->setSamplingBy($form->get('samplingBy')->getData());
+            $dateF = $form->get('dateOfManufacturing')->getData();
+            $dateDlc = $form->get('DlcOrDluo')->getData();
+
+            if ($dateDlc < $dateF) {
+                $this->addFlash('danger', 'La date de DLC ne peut pas être plus ancienne que la date de fabrication');
+                return $this->redirectToRoute('app_detail_order', [
+                    'id' => $order->getId()
+                ]);
+            }
 
             $manager->persist($echantillon);
             $manager->flush();
