@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un rapport d'audit - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="qsa-login-form col-11 col-md-8 col-lg-5 mt-5">
+            {{ form_start(form) }}
+
+            <div class="mt-1">
+                {{ form_label(form.file) }}
+                <div class="errors mt-1">
+                    {{ form_errors(form.file) }}
+                </div>
+                {{ form_widget(form.file, { attr : { class : 'form-control'}}) }}
+            </div>
+
+            <div class=" mt-1">
+                {{ form_label(form.entreprise) }}
+                <div class="errors mt-1">
+                    {{ form_errors(form.entreprise) }}
+                </div>
+                {{ form_widget(form.entreprise,) }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
