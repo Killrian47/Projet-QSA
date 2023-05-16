@@ -9,6 +9,7 @@ use App\Entity\Entreprise;
 use App\Entity\EtatPhysique;
 use App\Entity\Lieu;
 use App\Entity\Stockage;
+use App\Repository\AnalyseRepository;
 use App\Repository\EntrepriseRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -81,6 +82,15 @@ class AddEchantillonOneByOneType extends AbstractType
                     'class' => 'qsa-input-form rounded',
                 ],
                 'label' => 'Date Abat. / Fabrication :',
+                'required' => false
+
+            ])
+            ->add('dateAnalyse', DateType::class, [
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'qsa-input-form rounded',
+                ],
+                'label' => 'Date d\'analyse :',
                 'required' => false
 
             ])
@@ -158,7 +168,12 @@ class AddEchantillonOneByOneType extends AbstractType
                     'class' => 'qsa-input-form rounded',
                 ],
                 'placeholder' => '-- Sélectionner l\'analyse à faire sur le produit --',
-                'required' => false
+                'required' => false,
+                'query_builder' => function (AnalyseRepository $repo) use ($user) {
+                return $repo->createQueryBuilder('a')
+                    ->where('a.entreprise = :userId')
+                    ->setParameter('userId', $user->getId());
+                }
 
             ])
             ->add('samplingBy', EntityType::class, [
@@ -171,10 +186,10 @@ class AddEchantillonOneByOneType extends AbstractType
                 'query_builder' => function (EntrepriseRepository $er) use ($user) {
                     return $er->createQueryBuilder('e')
                         ->where('e.name LIKE :qsa')
-                        ->orWhere('e.id = :user')
+                        ->orWhere('e.id = :userId')
                         ->setParameters([
                             'qsa' => 'QSA',
-                            'user' => $user->getId(),
+                            'userId' => $user->getId(),
                         ]);
                 },
                 'required' => false

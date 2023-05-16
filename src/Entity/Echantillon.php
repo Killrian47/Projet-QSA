@@ -68,6 +68,9 @@ class Echantillon
     #[ORM\ManyToOne(inversedBy: 'enchantillons')]
     private ?Entreprise $samplingBy = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateAnalyse = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -285,6 +288,18 @@ class Echantillon
     public function setSamplingBy(?Entreprise $samplingBy): self
     {
         $this->samplingBy = $samplingBy;
+
+        return $this;
+    }
+
+    public function getDateAnalyse(): ?\DateTimeInterface
+    {
+        return $this->dateAnalyse;
+    }
+
+    public function setDateAnalyse(?\DateTimeInterface $dateAnalyse): self
+    {
+        $this->dateAnalyse = $dateAnalyse;
 
         return $this;
     }

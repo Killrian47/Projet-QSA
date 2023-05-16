@@ -74,7 +74,7 @@
 
         <div class="d-flex justify-content-between">
             {# Date de fabrication #}
-            <div class="mb-2 w-30">
+            <div class="mb-2 w-20">
                 {{ form_label(form.dateOfManufacturing) }}
                 <div class="errors mt-2">
                     {{ form_errors(form.dateOfManufacturing) }}
@@ -83,7 +83,7 @@
             </div>
             {# Date de fabrication #}
             {# DLC / DLUO #}
-            <div class="mb-2 w-30">
+            <div class="mb-2 w-20">
                 {{ form_label(form.DlcOrDluo) }}
                 <div class="errors mt-2">
                     {{ form_errors(form.DlcOrDluo) }}
@@ -92,7 +92,7 @@
             </div>
             {# DLC / DLUO #}
             {# Date de prélèvement #}
-            <div class="mb-2 w-30">
+            <div class="mb-2 w-20">
                 {{ form_label(form.dateOfSampling) }}
                 <div class="errors mt-2">
                     {{ form_errors(form.dateOfSampling) }}
@@ -100,6 +100,15 @@
                 {{ form_widget(form.dateOfSampling) }}
             </div>
             {# Date de prélèvement #}
+            {# Date d'analyse #}
+            <div class="mb-2 w-20">
+                {{ form_label(form.dateAnalyse) }}
+                <div class="errors mt-2">
+                    {{ form_errors(form.dateAnalyse) }}
+                </div>
+                {{ form_widget(form.dateAnalyse) }}
+            </div>
+            {# Date d'analyse #}
         </div>
 
         <div class="d-flex justify-content-between">
