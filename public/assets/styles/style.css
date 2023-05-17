@@ -4,6 +4,7 @@
 @import "home.css";
 @import "account.css";
 @import "echantillon.css";
+@import "pagination.css";
 
 li {
     list-style: none;

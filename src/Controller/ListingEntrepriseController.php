@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ListingEntrepriseController extends AbstractController
 {
@@ -20,16 +20,18 @@ class ListingEntrepriseController extends AbstractController
         $this->manager = $manager;
     }
 
-    #[Route('/admin', name: 'app_entreprise')]
-    public function index(PaginatorInterface $paginator, Request $request, EntrepriseRepository $entrepriseRepository,): Response
+    #[Route('/admin/liste-des-entreprises', name: 'app_entreprise')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function index(PaginatorInterface $paginator, Request $request,): Response
     {
-        $entreprises = $entrepriseRepository->findBY([], ['name' => 'ASC']);
-        $query = $this->manager->createQuery('SELECT e FROM App\Entity\Entreprise e ORDER BY e.name ASC');
-        $pagination = $paginator->paginate($query,$request->query->getInt('page', 1), 2);
-
+        $query = $this->manager->createQuery('SELECT e FROM App\Entity\Entreprise e ORDER BY e.name ASC')->getResult();
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            30
+        );
 
         return $this->render('listing_entreprise/index.html.twig', [
-            'entreprises' => $entreprises,
             'pagination' => $pagination
         ]);
     }

@@ -17,7 +17,7 @@
                                     exportés</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" {# href="{{ path('app_admin') }}" #}>Liste des
+                                <a class="nav-link" aria-current="page" href="{{ path('app_entreprise') }}" >Liste des
                                     entreprises</a>
                             </li>
                             <li class="nav-item">
@@ -25,11 +25,11 @@
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" {# href="{{ path('app_home') }}" #}>Toutes vos
+                                <a class="nav-link" aria-current="page" href="{{ path('app_home') }}" >Toutes vos
                                     analyses</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" {# href="{{ path('app_choose_method') }}" #}>Envoyer de nouveaux
+                                <a class="nav-link" href="#" >Envoyer de nouveaux
                                     échantillons</a>
                             </li>
                         {% endif %}
@@ -55,7 +55,7 @@
                     <a href="{{ path('app_home') }}" class="qsa-link-header">
                         <li class="p-2 qsa-link">Bons non exportés</li>
                     </a>
-                    <a href="{{ path('app_home') }}" class="qsa-link-header qsa-link-header-1">
+                    <a href="{{ path('app_entreprise') }}" class="qsa-link-header qsa-link-header-1">
                         <li class="p-2 qsa-link">Liste des entreprises</li>
                     </a>
                     <a href="{{ path('app_add_pdf') }}" class=" qsa-link-header qsa-link-header-1">

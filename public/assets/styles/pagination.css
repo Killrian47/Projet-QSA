@@ -1,0 +1,27 @@
+/* Styles pour la pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination span {
+    margin: 10px 5px;
+    border-radius: 5px;
+}
+
+.pagination a, .current {
+    display: block;
+    padding: 8px;
+    border: 2px solid #FFDD00;
+    color: #333;
+    border-radius: 5px;
+}
+
+.pagination a:hover {
+    background-color: #eee;
+}
+
+.current .pagination a {
+    background-color: #333;
+    color: #fff;
+}
