@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des entreprises | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <div class="w-75 mx-auto">
+        {% include '_includes/searchBar.html.twig' %}
+    </div>
+
+    <div class="col-lg-10 mx-auto">
+        {% if orders is defined %}
+            {% if orders is not empty %}
+                <div>
+                    <h2>Commandes créées entre le {{ date1 | date('d-m-Y') }} et le {% if date2 is defined %}
+                            {{ date2 | date('d-m-Y') }}
+                        {% endif %} par des entreprises ayant " {{ search }} " dans leur nom
+                    </h2>
+                    <hr class="w-50 sep">
+                    <div class="list-entreprise">
+                        {% for order in orders %}
+                            <div class="entreprise-container">
+                                <h5>Bon de commande numéro {{ order.id }}</h5>
+
+                                <div class="order-of-entreprise">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Nombre d'échantillons</th>
+                                            <th scope="col">A été exporté</th>
+                                            <th scope="col">Crée le :</th>
+                                            <th scope="col">Par</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% set countEchantillon = 0 %}
+
+                                        {% for echantillon in order.echantillons %}
+                                            {% set countEchantillon = countEchantillon + 1 %}
+                                        {% endfor %}
+
+                                        {% if countEchantillon != 0 %}
+                                            <tr>
+                                                <td>{{ countEchantillon }}</td>
+                                                {% if order.isExported == 0 %}
+                                                    <td>Non</td>
+                                                {% else %}
+                                                    <td>Oui</td>
+                                                {% endif %}
+                                                <td>{{ order.createdAt | date("d-m-Y") }}</td>
+                                                <td class="fw-bold">{{ order.entreprise.name }}</td>
+                                                <td>
+                                                    <a href="{{ path('app_detail_order', { id : order.id}) }}">Voir
+                                                        plus</a></td>
+                                            </tr>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div>
+                    <h2 class="text-center">Bons de commandes crées {% if date2 is defined %}
+                        entre
+                        {% endif %}le {{ date1 | date('d-m-Y') }} et le {% if date2 is defined %}
+                            {{ date2 | date('d-m-Y') }}
+                        {% endif %} par des entreprises ayant " {{ search }} " dans leurs noms</h2>
+                    <hr class="sep">
+                    <div>
+                        <h4 class="text-center mt-2">Il n'y a pas de bons de commandes créés entre ces dates</h4>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock %}

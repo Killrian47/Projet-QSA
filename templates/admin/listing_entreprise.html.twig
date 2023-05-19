@@ -3,8 +3,12 @@
 {% block title %}Liste des entreprises - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="col-10 mx-auto d-flex justify-content-around">
 
+    <div class="w-75 mx-auto">
+        {% include '_includes/searchBar.html.twig' %}
+    </div>
+
+    <div class="col-10 mx-auto d-flex justify-content-around">
         <div class="w-30 qsa-radius qsa-border background-gray p-3">
             {% for item in pagination | slice(0,10) %}
                 <div class="d-flex justify-content-between">
@@ -33,8 +37,8 @@
     </div>
 
     {# Afficher les liens de pagination #}
-        <div class="pagination ">
-            {{ knp_pagination_render(pagination) }}
-        </div>
+    <div class="pagination ">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
 {% endblock %}

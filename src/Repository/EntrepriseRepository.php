@@ -56,6 +56,17 @@ class EntrepriseRepository extends ServiceEntityRepository implements PasswordUp
         $this->save($user, true);
     }
 
+    public function findByEntrepriseName(string $name)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 //    /**
 //     * @return Entreprise[] Returns an array of Entreprise objects
 //     */
