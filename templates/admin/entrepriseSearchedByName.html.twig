@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat de la recherche pour " {{ search }} " - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <div class="w-75 mx-auto">
+        {% include '_includes/searchBar.html.twig' %}
+    </div>
+
+    {% if entreprises is defined %}
+        {% if entreprises is not empty %}
+            <div>
+                <h2>Résultat pour votre recherche "{% if search is defined %}
+                        {{ search }}
+                    {% endif %}"
+                </h2>
+                <hr class="sep w-50">
+                <div class="list-entreprise">
+                    {% for entreprise in entreprises %}
+                        <div class="entreprise-container">
+                            <div class="d-flex justify-content-between">
+                                <h4>Nom de l'entreprise : {{ entreprise.name }}</h4>
+
+                                <a href="{{ path('app_entreprise', {'id': entreprise.id}) }}">Détail de l'entreprise</a>
+                            </div>
+                            <div class="order-of-entreprise">
+                                <h5>Bon de commande :</h5>
+                                {% set counter = 0 %}
+                                {% if entreprise.orders is not empty %}
+
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Numéro bon de commande</th>
+                                            <th scope="col">Nombre d'échantillons</th>
+                                            <th scope="col">A été exporté</th>
+                                            <th scope="col">Crée le :</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for order in entreprise.orders %}
+                                            {% set countEchantillon = 0 %}
+                                            {% for echantillon in order.echantillons %}
+                                                {% set countEchantillon = countEchantillon + 1 %}
+                                            {% endfor %}
+
+                                            {% if countEchantillon != 0 %}
+                                                {% if counter < 5 %}
+                                                    <tr>
+                                                        <td>{{ order.id }}</td>
+                                                        <td>{{ countEchantillon }}</td>
+                                                        {% if order.isExported == 0 %}
+                                                            <td>Non</td>
+                                                        {% else %}
+                                                            <td>Oui</td>
+                                                        {% endif %}
+                                                        <td>{{ order.createdAt | date("d-m-Y") }}</td>
+                                                        <td>
+                                                            <a href="{{ path('app_detail_order', { id : order.id}) }}">Voir
+                                                                plus</a></td>
+                                                    </tr>
+                                                {% endif %}
+                                                {% set counter = counter + 1 %}
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <strong class="text-center">Pas de bon de commande pour cette entreprise</strong>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div>
+                <h2>Résultat pour votre recherche "{% if search is defined %}
+                        {{ search }}
+                    {% endif %}"
+                </h2>
+                <hr class="sep w-50">
+                <div class="d-flex justify-content-center align-items-center">
+                    <h4>Il n'y a pas d'entreprise correspondant à votre recherche</h4>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

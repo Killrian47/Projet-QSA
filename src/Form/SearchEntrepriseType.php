@@ -16,15 +16,18 @@ class SearchEntrepriseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('search', SearchEntrepriseType::class, [
+            ->add('search', SearchType::class, [
                 'required' => false,
-                'label' => 'Rechercher une entreprise par son nom :'
+                'label' => 'Rechercher une entreprise par son nom :',
+                'attr' => [
+                    'class' => 'qsa-input-form rounded'
+                ]
             ])
             ->add('date1', DateType::class, [
                 'required' => false,
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'qsa-input-form rounded',
                 ],
                 'label' => 'première date'
             ])
@@ -32,7 +35,7 @@ class SearchEntrepriseType extends AbstractType
                 'required' => false,
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'qsa-input-form rounded',
                 ],
                 'label' => 'deuxième date',
             ])

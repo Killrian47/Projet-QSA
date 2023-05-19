@@ -1,0 +1,42 @@
+<div class="">
+    {{ form_start(form) }}
+
+    {#    <strong>Rechercher soit par</strong> #}
+    <div class="d-flex flex-column">
+        {{ form_label(form.search) }}
+        <div class="errors mt-1">
+            {{ form_errors(form.search) }}
+        </div>
+        {{ form_widget(form.search) }}
+    </div>
+
+    <div class="d-flex mt-1 flex-column">
+        <div class="">
+            <p class="mb-0">Ou trouver un <strong>BON DE COMMANDE</strong> entre la
+                <strong>{{ form_label(form.date1) }}</strong></p>
+            <div class="d-flex flex-column">
+                <div class="errors mt-1">
+                    {{ form_errors(form.date1) }}
+                </div>
+                {{ form_widget(form.date1) }}
+            </div>
+        </div>
+
+        <div class="mt-1">
+            <p class="mb-0">et la <strong>{{ form_label(form.date2) }}</strong></p>
+            <div class="d-flex flex-column">
+                <div class="errors mt-1">
+                    {{ form_errors(form.date2) }}
+                </div>
+                {{ form_widget(form.date2) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-column flex-md-row justify-content-between">
+        {{ form_widget(form.submit, { attr : { class : 'btn qsa-btn mt-3 mb-4 col-3 '}}) }}
+        {% include '_includes/buttonDeleteEmptyOrder.html.twig' %}
+    </div>
+
+    {{ form_end(form) }}
+</div>
