@@ -1,0 +1,14 @@
+.qsa-letters {
+    background: #dee2e6;
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid #FFDD00;
+    text-decoration: none;
+    color: black;
+}
+.qsa-letters:hover {
+    color: white;
+    border-color: #a28b00;
+    background-color: #a28b00;
+    transition: background-color .2s ease-in-out, border-color .2s ease-in-out, color .2s ease-in-out;
+}

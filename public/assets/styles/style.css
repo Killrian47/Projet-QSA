@@ -5,6 +5,7 @@
 @import "account.css";
 @import "echantillon.css";
 @import "pagination.css";
+@import "letters.css";
 
 li {
     list-style: none;

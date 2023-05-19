@@ -63,8 +63,34 @@ class EntrepriseRepository extends ServiceEntityRepository implements PasswordUp
             ->setParameter('name', '%' . $name . '%')
             ->orderBy('e.name', 'ASC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
+    }
+
+    public function entrepriseStartedByA()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'A%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByB()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'B%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByC()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'C%')
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**
