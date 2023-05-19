@@ -1,0 +1,84 @@
+{% if entreprisesA is not empty %}
+    <div class="col-12 p-2 mb-3">
+        <h2>Entreprise commençant par A</h2>
+        <hr class="sep w-50">
+        <div class="list-entreprise">
+            {% for entreprise in entreprisesA %}
+                <div class="entreprise-container qsa-radius background-gray">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="p-2">{{ entreprise.name }}</h4>
+                        <a class="pt-2 px-3" href="{{ path('app_entreprise', { id : entreprise.id}) }}">Détail de
+                            l'entreprise</a>
+                    </div>
+                    <div class="order-of-entreprise">
+                        <h5 class="p-2">Bon de commandes de l'entreprise :</h5>
+                        {% set counter = 0 %}
+
+                        {% if entreprise.orders is not empty %}
+                            <table class="table qsa-border qsa-table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">N<sup>o</sup></th>
+                                    <th scope="col" class="text-center">Nb échantillons</th>
+                                    <th scope="col" class="text-center">Exporté?</th>
+                                    <th scope="col" class="text-center">Crée le :</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for order in entreprise.orders %}
+
+                                    {% if order.entreprise.id == entreprise.id %}
+
+                                        {% set countEchantillon = 0 %}
+
+                                        {% for echantillon in order.echantillons %}
+                                            {% set countEchantillon = countEchantillon + 1 %}
+                                        {% endfor %}
+
+
+                                        {% if countEchantillon != 0 %}
+                                            {% if counter < 5 %}
+                                                <tr>
+                                                    <td>{{ order.id }}</td>
+                                                    <td class="text-center">{{ countEchantillon }}</td>
+                                                    {% if order.isExported == 0 %}
+                                                        <td class="text-center">Non</td>
+                                                    {% else %}
+                                                        <td class="text-center">Oui</td>
+                                                    {% endif %}
+                                                    <td class="text-center">{{ order.createdAt | date("d-m-Y") }}</td>
+                                                    <td>
+                                                        <a class="qsa-alpha"
+                                                           href="{{ path('app_detail_order', { id : order.id}) }}">+</a>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                            {% set counter = counter + 1 %}
+                                        {% endif %}
+
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p class="mb-0 d-flex justify-content-center align-items-center fw-bold">Pas de bons de
+                                commandes
+                                pour
+                                cette
+                                entreprise</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <div class="col-12 p-2 mb-3">
+        <h2>Entreprise commençant par A</h2>
+        <hr class="sep w-50">
+        <div class="d-flex justify-content-center align-items-center">
+            <p>Pas d'entreprise commençant par A</p>
+        </div>
+    </div>
+{% endif %}
