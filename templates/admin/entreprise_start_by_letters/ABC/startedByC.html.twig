@@ -1,13 +1,13 @@
 {% if entreprisesC is not empty %}
     <div class="col-12 p-2 mb-3">
-        <h2>Entreprise commençant par A</h2>
+        <h3>Entreprise commençant par C</h3>
         <hr class="sep w-50">
         <div class="list-entreprise">
             {% for entreprise in entreprisesC %}
                 <div class="entreprise-container qsa-radius background-gray">
                     <div class="d-flex justify-content-between">
                         <h4 class="p-2">{{ entreprise.name }}</h4>
-                        <a class="pt-2 px-3" href="{{ path('app_entreprise', { id : entreprise.id}) }}">Détail de
+                        <a class="pt-2 px-3" href="{{ path('app_detail_entreprise', { id : entreprise.id}) }}">Détail de
                             l'entreprise</a>
                     </div>
                     <div class="order-of-entreprise">
@@ -75,7 +75,7 @@
     </div>
 {% else %}
     <div class="col-12 p-2 mb-3">
-        <h2>Entreprise commençant par C</h2>
+        <h3>Entreprise commençant par C</h3>
         <hr class="sep w-50">
         <div class="d-flex justify-content-center align-items-center">
             <p>Pas d'entreprise commençant par C</p>

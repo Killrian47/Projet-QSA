@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de l'entreprise | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="col-lg-6 mx-auto mt-2 ">
+        <div class="background-gray qsa-radius">
+            <h3 class="text-center p-2">{{ entreprise.name }}</h3>
+
+            {% if entreprise.orders is not empty %}
+                <table class="table qsa-border">
+                    <thead>
+                    <tr>
+                        <th scope="col">Numéro bon de commande</th>
+                        <th scope="col">Nombre d'échantillons</th>
+                        <th scope="col">A été exporté</th>
+                        <th scope="col">Crée le :</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    {% for order in pagination %}
+                        {% set countEchantillon = 0 %}
+                        {% for echantillon in order.echantillons %}
+                            {% set countEchantillon = countEchantillon + 1 %}
+                        {% endfor %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ countEchantillon }}</td>
+                            {% if order.isExported == 0 %}
+                                <td>Non</td>
+                            {% else %}
+                                <td>Oui</td>
+                            {% endif %}
+                            <td>{{ order.createdAt | date("d-m-Y") }}</td>
+                            <td>
+                                <a href="{{ path('app_detail_order', { id : order.id}) }}">Voir
+                                    plus</a></td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            {% endif %}
+        </div>
+        <div class="pagination ">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
