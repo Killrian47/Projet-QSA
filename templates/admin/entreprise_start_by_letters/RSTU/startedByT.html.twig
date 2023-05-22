@@ -1,9 +1,9 @@
-{% if entreprisesB is not empty %}
+{% if entreprisesT is not empty %}
     <div class="col-12 p-2 mb-3">
-        <h3>Entreprise commençant par B</h3>
+        <h3>Entreprise commençant par T</h3>
         <hr class="sep w-50">
         <div class="list-entreprise">
-            {% for entreprise in entreprisesB %}
+            {% for entreprise in entreprisesT %}
                 <div class="entreprise-container qsa-radius background-gray">
                     <div class="d-flex justify-content-between">
                         <h4 class="p-2">{{ entreprise.name }}</h4>
@@ -74,11 +74,11 @@
         </div>
     </div>
 {% else %}
-    <div class="col-12 p-2 mb-3">
-        <h3>Entreprise commençant par B</h3>
+    <div class="col-12 p-2 mb-3 ">
+        <h3>Entreprise commençant par T</h3>
         <hr class="sep w-50">
         <div class="d-flex justify-content-center align-items-center">
-            <p>Pas d'entreprise commençant par B</p>
+            <p>Pas d'entreprise commençant par T</p>
         </div>
     </div>
 {% endif %}
