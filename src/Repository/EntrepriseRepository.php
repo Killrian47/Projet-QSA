@@ -98,6 +98,236 @@ class EntrepriseRepository extends ServiceEntityRepository implements PasswordUp
             ->getResult();
     }
 
+    public function entrepriseStartedByD()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'D%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByE()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'E%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByF()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'F%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByG()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'G%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByH()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'H%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByI()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'I%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByJ()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'J%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByK()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'K%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByL()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'L%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByM()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'M%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByN()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'N%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByO()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'O%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByP()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'P%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByQ()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'Q%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByR()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'R%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByS()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'S%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByT()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'T%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByU()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'U%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByV()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'V%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByW()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'W%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByX()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'X%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByY()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'Y%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function entrepriseStartedByZ()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :name')
+            ->setParameter('name', 'Z%')
+            ->orderBy('e.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Entreprise[] Returns an array of Entreprise objects
 //     */
