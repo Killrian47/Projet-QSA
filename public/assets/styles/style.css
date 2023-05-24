@@ -27,7 +27,8 @@ li {
     border: 2px solid #a28b00 !important;
     color: white !important;
 }
-.qsa-btn:hover a{
+
+.qsa-btn:hover a {
     color: white !important;
 }
 
@@ -65,4 +66,8 @@ li {
 
 .mb-10 {
     margin-bottom: 5rem;
+}
+
+.qsa-none {
+    display: none;
 }

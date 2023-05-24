@@ -14,11 +14,13 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class PDFController extends AbstractController
 {
     #[Route('/ajouter-un-pdf', name: 'app_add_pdf')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager, MailerInterface $mailer): Response
     {
         $form = $this->createForm(PDFType::class);

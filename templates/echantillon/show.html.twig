@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail échantillon n°{{ echantillon.id }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="w-50 mx-auto background-gray qsa-radius">
+        <h2 class="text-center p-2">Échantillon n° {{ echantillon.id }}</h2>
+
+        <table class="table qsa-border">
+            <tbody>
+            <tr>
+                <th>Crée par ?</th>
+                <td>{% if app.user.id == echantillon.entreprise.id %}
+                        Vous
+                    {% else %}
+                        {{ echantillon.entreprise.name }}
+                    {% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nom du produit</th>
+                <td>{{ echantillon.productName }}</td>
+            </tr>
+            <tr>
+                <th>Numéro de lot</th>
+                <td>{{ echantillon.numberOfBatch }}</td>
+            </tr>
+            <tr>
+                <th>Fabricant</th>
+                <td>{{ echantillon.supplier }}</td>
+            </tr>
+            <tr>
+                <th>Température du produit</th>
+                <td>{{ echantillon.temperatureOfProduct }}</td>
+            </tr>
+            <tr>
+                <th>Température de l'enceinte</th>
+                <td>{{ echantillon.temperatureOfEnceinte }}</td>
+            </tr>
+            <tr>
+                <th>Date de fabrication</th>
+                <td>{{ echantillon.dateOfManufacturing ? echantillon.dateOfManufacturing|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DLC / DLUO</th>
+                <td>{{ echantillon.DlcOrDluo ? echantillon.DlcOrDluo|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date de prélèvement</th>
+                <td>{{ echantillon.dateOfSampling ? echantillon.dateOfSampling|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Analyse à DLC ?</th>
+                <td>{{ echantillon.analyseDlc ? 'Oui' : 'Non' }}</td>
+            </tr>
+            <tr>
+                <th>Validation de DLC ?</th>
+                <td>{{ echantillon.validationDlc ? 'Oui' : 'Non' }}</td>
+            </tr>
+            <tr>
+                <th>Date d'analyse</th>
+                <td>{{ echantillon.dateAnalyse ? echantillon.dateAnalyse|date('d-m-Y') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-between py-4 px-1">
+            <a href="{{ path('app_detail_order', {id : echantillon.numberOfOrder.id }) }}">Retour au détail du bon de
+                commande</a>
+            {% if app.user.id == echantillon.entreprise.id or is_granted("ROLE_ADMIN") %}
+                <a href="{{ path('app_echantillons_edit', {'id': echantillon.id}) }}">Modifier l'échantillon</a>
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}

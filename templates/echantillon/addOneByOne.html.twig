@@ -8,7 +8,7 @@
 
         {# Nom du produit #}
         <div class="mb-2">
-            {{ form_label(form.productName) }}
+            {{ form_label(form.productName) }} <span class="text-danger">*</span>
             <div class="errors mt-2">
                 {{ form_errors(form.productName) }}
             </div>
@@ -93,7 +93,7 @@
             {# DLC / DLUO #}
             {# Date de prélèvement #}
             <div class="mb-2 w-20">
-                {{ form_label(form.dateOfSampling) }}
+                {{ form_label(form.dateOfSampling) }} <span class="text-danger">*</span>
                 <div class="errors mt-2">
                     {{ form_errors(form.dateOfSampling) }}
                 </div>
@@ -102,7 +102,7 @@
             {# Date de prélèvement #}
             {# Date d'analyse #}
             <div class="mb-2 w-20">
-                {{ form_label(form.dateAnalyse) }}
+                {{ form_label(form.dateAnalyse) }} <span class="text-danger">*</span>
                 <div class="errors mt-2">
                     {{ form_errors(form.dateAnalyse) }}
                 </div>
@@ -114,7 +114,7 @@
         <div class="d-flex justify-content-between">
             {# Conditionnement #}
             <div class="mb-2 w-30">
-                {{ form_label(form.conditioning) }}
+                {{ form_label(form.conditioning) }} <span class="text-danger">*</span>
                 <div class="errors mt-2">
                     {{ form_errors(form.conditioning) }}
                 </div>
@@ -123,35 +123,13 @@
             {# Conditionnement #}
             {# Etat physique #}
             <div class="mb-2 w-30">
-                {{ form_label(form.etatPhysique) }}
+                {{ form_label(form.etatPhysique) }} <span class="text-danger">*</span>
                 <div class="errors mt-2">
                     {{ form_errors(form.etatPhysique) }}
                 </div>
                 {{ form_widget(form.etatPhysique) }}
             </div>
             {# Etat physique #}
-            {# Lieu #}
-            <div class="mb-2 w-30">
-                {{ form_label(form.Lieu) }}
-                <div class="errors mt-2">
-                    {{ form_errors(form.Lieu) }}
-                </div>
-                {{ form_widget(form.Lieu) }}
-            </div>
-            {# Lieu #}
-        </div>
-
-
-        <div class="d-flex justify-content-between">
-            {# Stockage #}
-            <div class="mb-2 w-30">
-                {{ form_label(form.stockage) }}
-                <div class="errors mt-2">
-                    {{ form_errors(form.stockage) }}
-                </div>
-                {{ form_widget(form.stockage) }}
-            </div>
-            {# Stockage #}
             {# Analyse #}
             <div class="mb-2 w-30">
                 {{ form_label(form.analyse) }}
@@ -161,6 +139,10 @@
                 {{ form_widget(form.analyse) }}
             </div>
             {# Analyse #}
+        </div>
+
+
+        <div class="d-flex justify-content-between">
             {# Prélevè par #}
             <div class="mb-2 w-30">
                 {{ form_label(form.samplingBy) }}
@@ -170,9 +152,29 @@
                 {{ form_widget(form.samplingBy) }}
             </div>
             {# Prélevé par #}
+            {# Date de rupture #}
+            <div class="mb-2 w-30 qsa-none" id="dateOfBreak">
+                {{ form_label(form.dateOfBreak) }} <span class="text-danger">*</span>
+                <div class="errors mt-2">
+                    {{ form_errors(form.tempOfBreak) }}
+                </div>
+                {{ form_widget(form.dateOfBreak) }}
+            </div>
+            {# Date de rupture #}
+            {# Température de rupture #}
+            <div class="mb-2 w-30 qsa-none" id="tempOfBreak">
+                {{ form_label(form.tempOfBreak) }} <span class="text-danger">*</span>
+                <div class="errors mt-2">
+                    {{ form_errors(form.tempOfBreak) }}
+                </div>
+                {{ form_widget(form.tempOfBreak) }}
+            </div>
+            {# Température de rupture #}
         </div>
 
+        <p class="mt-3 mb-0">Les champs avec une <span class="text-danger">*</span> sont obligatoire</p>
 
+        <button type="submit" class="btn qsa-btn mt-3">Enregistrer l'échantillon</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

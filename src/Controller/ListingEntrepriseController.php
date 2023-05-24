@@ -23,7 +23,6 @@ class ListingEntrepriseController extends AbstractController
     }
 
     #[Route('/admin/liste-des-entreprises', name: 'app_entreprise')]
-    #[IsGranted('ROLE_ADMIN')]
     public function index(PaginatorInterface $paginator, Request $request, EntrepriseRepository $entrepriseRepository, OrderRepository $orderRepository): Response
     {
         $form = $this->createForm(SearchEntrepriseType::class);

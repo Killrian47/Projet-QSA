@@ -23,12 +23,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class AddEchantillonOneByOneType extends AbstractType
 {
     public function __construct(
         private Security $security,
-    ) {
+    )
+    {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -41,8 +43,12 @@ class AddEchantillonOneByOneType extends AbstractType
                     'class' => 'qsa-input-form rounded'
                 ],
                 'label' => 'Nom du produit :',
-                'required' => false
-
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez saisir le nom du produit',
+                    ])
+                ]
             ])
             ->add('numberOfBatch', TextType::class, [
                 'attr' => [
@@ -91,7 +97,12 @@ class AddEchantillonOneByOneType extends AbstractType
                     'class' => 'qsa-input-form rounded',
                 ],
                 'label' => 'Date d\'analyse :',
-                'required' => false
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez saisir un date d\'analyse'
+                    ])
+                ]
 
             ])
             ->add('DlcOrDluo', DateType::class, [
@@ -109,7 +120,12 @@ class AddEchantillonOneByOneType extends AbstractType
                     'class' => 'qsa-input-form rounded',
                 ],
                 'label' => 'Prélevé le ? à ?',
-                'required' => false
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez saisir une date de prélèvement'
+                    ])
+                ]
 
             ])
             ->add('analyseDlc', CheckboxType::class, [
@@ -122,9 +138,12 @@ class AddEchantillonOneByOneType extends AbstractType
             ->add('validationDlc', CheckboxType::class, [
                 'label' => 'Validation de DLC (Par LOT)',
                 'label_attr' => [
-                    'class' => 'me-2'
+                    'class' => 'me-2',
                 ],
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'id' => 'check_box'
+                ]
             ])
             ->add('conditioning', EntityType::class, [
                 'class' => Conditionnement::class,
@@ -132,7 +151,13 @@ class AddEchantillonOneByOneType extends AbstractType
                     'class' => 'qsa-input-form rounded',
                 ],
                 'placeholder' => '-- Sélectionner le conditionnement --',
-                'required' => false
+                'required' => false,
+                'label' => 'Conditionnement :',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez sélectionné le conditionnement'
+                    ])
+                ]
 
             ])
             ->add('etatPhysique', EntityType::class, [
@@ -141,25 +166,13 @@ class AddEchantillonOneByOneType extends AbstractType
                     'class' => 'qsa-input-form rounded',
                 ],
                 'placeholder' => '-- Sélectionner l\'état physique du produit --',
-                'required' => false
-
-            ])
-            ->add('Lieu', EntityType::class, [
-                'class' => Lieu::class,
-                'attr' => [
-                    'class' => 'qsa-input-form rounded',
-                ],
-                'placeholder' => '-- Sélectionner le lieu --',
-                'required' => false
-
-            ])
-            ->add('stockage', EntityType::class, [
-                'class' => Stockage::class,
-                'attr' => [
-                    'class' => 'qsa-input-form rounded',
-                ],
-                'placeholder' => '-- Sélectionner le stockage --',
-                'required' => false
+                'required' => false,
+                'label' => 'État physique :',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez sélectionné l\'état physique'
+                    ])
+                ]
 
             ])
             ->add('analyse', EntityType::class, [
@@ -170,9 +183,9 @@ class AddEchantillonOneByOneType extends AbstractType
                 'placeholder' => '-- Sélectionner l\'analyse à faire sur le produit --',
                 'required' => false,
                 'query_builder' => function (AnalyseRepository $repo) use ($user) {
-                return $repo->createQueryBuilder('a')
-                    ->where('a.entreprise = :userId')
-                    ->setParameter('userId', $user->getId());
+                    return $repo->createQueryBuilder('a')
+                        ->where('a.entreprise = :userId')
+                        ->setParameter('userId', $user->getId());
                 }
 
             ])
@@ -194,12 +207,22 @@ class AddEchantillonOneByOneType extends AbstractType
                 },
                 'required' => false
             ])
-            ->add('submit', SubmitType::class, [
+            ->add('tempOfBreak', IntegerType::class, [
                 'attr' => [
-                    'class' => 'btn qsa-btn mt-3'
+                    'class' => 'qsa-input-form rounded ',
                 ],
-                'label' => 'Ajouter l\'échantillon au bon de commande'
-            ]);
+                'label' => 'Température de rupture :',
+                'required' => false,
+            ])
+            ->add('dateOfBreak', DateTimeType::class, [
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'qsa-input-form rounded',
+                ],
+                'label' => 'Date de rupture :',
+                'required' => false
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
