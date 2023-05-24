@@ -104,7 +104,7 @@
             {% endfor %}
         </div>
         <div class="w-30 qsa-radius qsa-border background-gray p-3">
-            {% for item in pagination | slice(10, 20) %}
+            {% for item in pagination | slice(10, 10) %}
                 <div class="d-flex justify-content-between">
                     <h6 class="mb-3">{{ item.name }}</h6>
                     <a href="{{ path('app_detail_entreprise', {'id': item.id}) }}">Détail entreprise</a>
