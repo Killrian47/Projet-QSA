@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EnchantillonRepository;
+use App\Repository\EchantillonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EnchantillonRepository::class)]
+#[ORM\Entity(repositoryClass: EchantillonRepository::class)]
 class Echantillon
 {
     #[ORM\Id]
@@ -50,12 +50,6 @@ class Echantillon
     #[ORM\ManyToOne(inversedBy: 'enchantillons')]
     private ?EtatPhysique $etatPhysique = null;
 
-    #[ORM\ManyToOne(inversedBy: 'enchantillons')]
-    private ?Lieu $Lieu = null;
-
-    #[ORM\ManyToOne(inversedBy: 'enchantillons')]
-    private ?Stockage $stockage = null;
-
     #[ORM\Column(nullable: true)]
     private ?bool $analyseDlc = null;
 
@@ -70,6 +64,12 @@ class Echantillon
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateAnalyse = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $tempOfBreak = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateOfBreak = null;
 
     public function getId(): ?int
     {
@@ -300,6 +300,30 @@ class Echantillon
     public function setDateAnalyse(?\DateTimeInterface $dateAnalyse): self
     {
         $this->dateAnalyse = $dateAnalyse;
+
+        return $this;
+    }
+
+    public function getTempOfBreak(): ?int
+    {
+        return $this->tempOfBreak;
+    }
+
+    public function setTempOfBreak(?int $tempOfBreak): self
+    {
+        $this->tempOfBreak = $tempOfBreak;
+
+        return $this;
+    }
+
+    public function getDateOfBreak(): ?\DateTimeInterface
+    {
+        return $this->dateOfBreak;
+    }
+
+    public function setDateOfBreak(?\DateTimeInterface $dateOfBreak): self
+    {
+        $this->dateOfBreak = $dateOfBreak;
 
         return $this;
     }

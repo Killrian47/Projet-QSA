@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Echantillon index{% endblock %}
+
+{% block body %}
+    <h1>Echantillon index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ProductName</th>
+                <th>NumberOfBatch</th>
+                <th>Supplier</th>
+                <th>TemperatureOfProduct</th>
+                <th>TemperatureOfEnceinte</th>
+                <th>DateOfManufacturing</th>
+                <th>DlcOrDluo</th>
+                <th>DateOfSampling</th>
+                <th>AnalyseDlc</th>
+                <th>ValidationDlc</th>
+                <th>DateAnalyse</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for echantillon in echantillons %}
+            <tr>
+                <td>{{ echantillon.id }}</td>
+                <td>{{ echantillon.productName }}</td>
+                <td>{{ echantillon.numberOfBatch }}</td>
+                <td>{{ echantillon.supplier }}</td>
+                <td>{{ echantillon.temperatureOfProduct }}</td>
+                <td>{{ echantillon.temperatureOfEnceinte }}</td>
+                <td>{{ echantillon.dateOfManufacturing ? echantillon.dateOfManufacturing|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ echantillon.DlcOrDluo ? echantillon.DlcOrDluo|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ echantillon.dateOfSampling ? echantillon.dateOfSampling|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ echantillon.analyseDlc ? 'Yes' : 'No' }}</td>
+                <td>{{ echantillon.validationDlc ? 'Yes' : 'No' }}</td>
+                <td>{{ echantillon.dateAnalyse ? echantillon.dateAnalyse|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_echantillons_show', {'id': echantillon.id}) }}">show</a>
+                    <a href="{{ path('app_echantillons_edit', {'id': echantillon.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_echantillons_new') }}">Create new</a>
+{% endblock %}

@@ -9,10 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class EntrepriseController extends AbstractController
 {
     #[Route('/entreprise/{id}', name: 'app_detail_entreprise')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(
         Entreprise $entreprise,
         EntityManagerInterface $manager,

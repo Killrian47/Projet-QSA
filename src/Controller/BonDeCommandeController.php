@@ -17,6 +17,11 @@ class BonDeCommandeController extends AbstractController
     #[Route('/bon-de-commande/{id}', name: 'app_detail_order')]
     public function detailOrder(Order $order, EchantillonRepository $echantillonRepository): Response
     {
+        if ($this->getUser()->isFirstConnection() === true) {
+            $this->addFlash('warning', 'Vous devez changer votre mot de passe avant de pouvoir naviguer sur le site ');
+            return $this->redirectToRoute('app_change_password');
+        }
+
         if ($this->getUser()->getId() !== $order->getEntreprise()->getId()) {
             foreach ($this->getUser()->getRoles() as $role) {
                 if ($role === 'ROLE_ADMIN') {
@@ -43,6 +48,11 @@ class BonDeCommandeController extends AbstractController
     #[Route('/bon-de-commande/ajouter-un-échantillon-manquant/{id}', name: 'app_add_missing_echantillon_to_order')]
     public function addMissingEchantillon(Request $request, Order $order, EntityManagerInterface $manager): Response
     {
+        if ($this->getUser()->isFirstConnection() === true) {
+            $this->addFlash('warning', 'Vous devez changer votre mot de passe avant de pouvoir naviguer sur le site ');
+            return $this->redirectToRoute('app_change_password');
+        }
+
         if ($this->getUser()->getId() !== $order->getEntreprise()->getId()) {
             $this->addFlash('danger', 'Vous n\'êtes pas a l\'origine de ce bon de commande, vous ne pouvez pas accéder à cette page');
             return $this->redirectToRoute('app_home');

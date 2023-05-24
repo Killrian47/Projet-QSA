@@ -26,18 +26,21 @@
                     <td>{{ echantillon.supplier }}</td>
                     <td>{{ echantillon.temperatureOfProduct }}</td>
                     <td>{{ echantillon.temperatureOfEnceinte }}</td>
-                    <td class="text-center"><a href="">Détails échantillon</a></td>
+                    <td class="text-center"><a href="{{ path('app_detail_echantillon', {'id': echantillon.id}) }}">Détails
+                            échantillon</a></td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
         {% if order.isExported == 0 %}
             {% if app.user.id == order.entreprise.id %}
-                <p class="ms-2 p-2"><a href="{{ path('app_add_missing_echantillon_to_order', {'id': order.id}) }}">Ajouter un échantillon
+                <p class="ms-2 p-2"><a href="{{ path('app_add_missing_echantillon_to_order', {'id': order.id}) }}">Ajouter
+                        un échantillon
                         manquant</a></p>
             {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
-                <a class="btn qsa-btn ms-2 mb-3" href="{{ path('app_export_in_csv', {'id': order.id}) }}">Exporter les échantillons
+                <a class="btn qsa-btn ms-2 mb-3" href="{{ path('app_export_in_csv', {'id': order.id}) }}">Exporter les
+                    échantillons
                     en
                     XLSX</a>
             {% endif %}
@@ -45,7 +48,8 @@
         {% endif %}
         {% if is_granted('ROLE_ADMIN') %}
             {% if order.isExported == 1 %}
-                <a class="btn qsa-btn ms-2 mb-3" href="{{ path('app_export_in_csv', { id : order.id}) }}">Exporter à nouveau le bon de
+                <a class="btn qsa-btn ms-2 mb-3" href="{{ path('app_export_in_csv', { id : order.id}) }}">Exporter à
+                    nouveau le bon de
                     commande</a>
             {% endif %}
         {% endif %}
