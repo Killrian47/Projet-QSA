@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="form-container col-11 col-md-8 col-lg-5 mx-auto">
+        <h3 class="text-center mb-3">Envoyer des échantillons avec un excel</h3>
+        {{ form_start(form) }}
+
+        <div class="mt-1">
+            {{ form_label(form.csv_file) }}
+            <div class="errors mt-1">
+                {{ form_errors(form.csv_file) }}
+            </div>
+            {{ form_widget(form.csv_file) }}
+        </div>
+
+        {{ form_rest(form) }}
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
