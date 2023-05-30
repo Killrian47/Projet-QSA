@@ -12,12 +12,12 @@ class EtatPhysiqueFixtures extends Fixture
     public const REFERENCE_ETAT_PHYSIQUE = 'etat_physique';
 
     public const ETAT_PHYSIQUE = [
-        'frais',
-        'surgelés',
-        'conserve',
-        'semi-conserve',
-        'sec',
-        'liquide'
+        'Frais',
+        'Surgelés',
+        'Conserve',
+        'Semi-conserve',
+        'Sec',
+        'Liquide'
     ];
 
     public function load(ObjectManager $manager): void
