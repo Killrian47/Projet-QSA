@@ -32,6 +32,9 @@ class ExcelType extends AbstractType
                 'required' => false,
                 'mapped' => false,
                 'label' => 'Ajouter un fichier excel avec les échantillons :',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
         ->add('submit', SubmitType::class, [
             'attr' => [

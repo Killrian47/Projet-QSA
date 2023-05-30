@@ -19,15 +19,58 @@
             </tr>
             </thead>
             <tbody>
+            {% set infoManquantes = 0 %}
             {% for echantillon in echantillons %}
+                {% set infoImportanteManquante = 0 %}
+                {% if echantillon.dateOfSampling == null %}
+                    {% set infoImportanteManquante = infoImportanteManquante + 1 %}
+                    {% set infoManquantes = infoManquantes + 1 %}
+                {% endif %}
+                {% if echantillon.productName == null %}
+                    {% set infoImportanteManquante = infoImportanteManquante + 1 %}
+                    {% set infoManquantes = infoManquantes + 1 %}
+                {% endif %}
+                {% if echantillon.etatPhysique == null %}
+                    {% set infoImportanteManquante = infoImportanteManquante + 1 %}
+                    {% set infoManquantes = infoManquantes + 1 %}
+                {% endif %}
+                {% if echantillon.conditioning == null %}
+                    {% set infoImportanteManquante = infoImportanteManquante + 1 %}
+                    {% set infoManquantes = infoManquantes + 1 %}
+                {% endif %}
+                {% if echantillon.dateAnalyse == null %}
+                    {% set infoImportanteManquante = infoImportanteManquante + 1 %}
+                    {% set infoManquantes = infoManquantes + 1 %}
+                {% endif %}
+                {% if echantillon.validationDlc == true %}
+                    {% if echantillon.tempOfBreak == null %}
+                        {% set infoImportanteManquante = infoImportanteManquante + 1 %}
+                        {% set infoManquantes = infoManquantes + 1 %}
+                    {% endif %}
+                    {% if echantillon.dateOfBreak == null %}
+                        {% set infoImportanteManquante = infoImportanteManquante + 1 %}
+                        {% set infoManquantes = infoManquantes + 1 %}
+                    {% endif %}
+                {% endif %}
                 <tr>
                     <td>{{ echantillon.numberOfBatch }}</td>
                     <td>{{ echantillon.productName }}</td>
                     <td>{{ echantillon.supplier }}</td>
                     <td>{{ echantillon.temperatureOfProduct }}</td>
                     <td>{{ echantillon.temperatureOfEnceinte }}</td>
-                    <td class="text-center"><a href="{{ path('app_detail_echantillon', {'id': echantillon.id}) }}">Détails
-                            échantillon</a></td>
+                    <td class="text-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ path('app_detail_echantillon', {'id': echantillon.id}) }}">Détails
+                                échantillon</a>
+                            {% if infoImportanteManquante != 0 %}
+
+                                <p class="text-danger mb-1 qsa-info-imp"><i
+                                            class="fa-solid fa-triangle-exclamation mb-1 text-danger"></i> {{ infoImportanteManquante }}
+                                    <span class="text-danger tooltiptext">Il manque {{ infoImportanteManquante }} informations importantes</span>
+                                </p>
+                            {% endif %}
+                        </div>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -39,10 +82,16 @@
                         manquant</a></p>
             {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
-                <a class="btn qsa-btn ms-2 mb-3" href="{{ path('app_export_in_csv', {'id': order.id}) }}">Exporter les
-                    échantillons
-                    en
-                    XLSX</a>
+                {% if infoManquantes == 0 %}
+                    <a class="btn qsa-btn ms-2 mb-3" href="{{ path('app_export_in_csv', {'id': order.id}) }}">Exporter
+                        les
+                        échantillons
+                        en
+                        XLSX</a>
+                {% else %}
+                    <h5 class="p-2 text-danger text-center">Il manque des informations sur les échantillons vous ne
+                        pouvez pas encore les récupérer</h5>
+                {% endif %}
             {% endif %}
         {% else %}
         {% endif %}
