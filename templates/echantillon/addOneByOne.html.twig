@@ -153,7 +153,7 @@
             </div>
             {# Prélevé par #}
             {# Date de rupture #}
-            <div class="mb-2 w-30 qsa-none" id="dateOfBreak">
+            <div class="mb-2 w-30 " id="dateOfBreak" style="display: none">
                 {{ form_label(form.dateOfBreak) }} <span class="text-danger">*</span>
                 <div class="errors mt-2">
                     {{ form_errors(form.tempOfBreak) }}
@@ -162,7 +162,7 @@
             </div>
             {# Date de rupture #}
             {# Température de rupture #}
-            <div class="mb-2 w-30 qsa-none" id="tempOfBreak">
+            <div class="mb-2 w-30 " id="tempOfBreak" style="display: none">
                 {{ form_label(form.tempOfBreak) }} <span class="text-danger">*</span>
                 <div class="errors mt-2">
                     {{ form_errors(form.tempOfBreak) }}
@@ -179,3 +179,7 @@
     </div>
 {% endblock %}
 
+{% block javascripts %}
+    <script src="assets/addEchantillon.js"></script>
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}

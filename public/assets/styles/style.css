@@ -6,6 +6,7 @@
 @import "echantillon.css";
 @import "pagination.css";
 @import "letters.css";
+@import "detailOrder.css";
 
 li {
     list-style: none;
@@ -70,4 +71,8 @@ li {
 
 .qsa-none {
     display: none;
+}
+
+.validation-dlc-check-box:s > .qsa-none {
+    display: initial;
 }

@@ -10,12 +10,5 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+import './header';
 
-document.getElementById('add_echantillon_one_by_one_validationDlc').addEventListener('click', changeDisplayNone);
-let flexNone1 = document.getElementById('tempOfBreak');
-let flexNone2 = document.getElementById('dateOfBreak');
-
-function changeDisplayNone() {
-    flexNone1.classList.toggle('qsa-none')
-    flexNone2.classList.toggle('qsa-none')
-}

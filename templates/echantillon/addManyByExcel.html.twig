@@ -1,20 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="form-container col-11 col-md-8 col-lg-5 mx-auto">
-        <h3 class="text-center mb-3">Envoyer des échantillons avec un excel</h3>
-        {{ form_start(form) }}
-
-        <div class="mt-1">
-            {{ form_label(form.csv_file) }}
-            <div class="errors mt-1">
-                {{ form_errors(form.csv_file) }}
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="qsa-login-form col-11 col-md-8 col-lg-5 mt-5 qsa-radius qsa-border">
+            {{ form_start(form) }}
+            <h3 class="text-center mb-3">Ajouter plusieurs échantillons en même temps</h3>
+            <div class="mt-1">
+                {{ form_label(form.csv_file) }}
+                <div class="errors mt-1">
+                    {{ form_errors(form.csv_file) }}
+                </div>
+                {{ form_widget(form.csv_file, { attr : { class : 'form-control'}}) }}
             </div>
-            {{ form_widget(form.csv_file) }}
+
+            <div class=" mt-1">
+                {{ form_rest(form) }}
+            </div>
+
+            {{ form_end(form) }}
         </div>
-
-        {{ form_rest(form) }}
-
-        {{ form_end(form) }}
     </div>
 {% endblock %}

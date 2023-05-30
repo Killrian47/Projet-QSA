@@ -22,6 +22,7 @@
                                     <th scope="col" class="text-center">Nb échantillons</th>
                                     <th scope="col" class="text-center">Exporté?</th>
                                     <th scope="col" class="text-center">Crée le :</th>
+                                    <th scope="col" class="text-center">#</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -47,9 +48,10 @@
                                                         <td class="text-center">Oui</td>
                                                     {% endif %}
                                                     <td class="text-center">{{ order.createdAt | date("d-m-Y") }}</td>
-                                                    <td>
-                                                        <a class="qsa-alpha"
-                                                           href="{{ path('app_detail_order', { id : order.id}) }}">+</a>
+                                                    <td class="text-center">
+                                                        <a
+                                                                href="{{ path('app_detail_order', { id : order.id}) }}">Détail
+                                                            du bon de commande</a>
                                                     </td>
                                                 </tr>
                                             {% endif %}
@@ -61,7 +63,8 @@
                                 </tbody>
                             </table>
                         {% else %}
-                            <p class="mb-0 d-flex justify-content-center align-items-center fw-bold p-2 mb-3">Pas de bons de
+                            <p class="mb-0 d-flex justify-content-center align-items-center fw-bold p-2 mb-3">Pas de
+                                bons de
                                 commandes
                                 pour
                                 cette

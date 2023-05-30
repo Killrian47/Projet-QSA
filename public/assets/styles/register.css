@@ -16,3 +16,17 @@
 .qsa-input-form:focus {
     border: 2px solid #FFDD00 !important;
 }
+
+.qsa-input-form-needed {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    border: 2px solid #FF0000;
+}
+
+.qsa-input-form-needed:focus {
+    border: 2px solid #FF0000 !important;
+}

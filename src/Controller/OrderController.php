@@ -145,10 +145,10 @@ class OrderController extends AbstractController
      */
     #[Route('/ajouter-plusieurs-échantillons/{id}', name: 'app_add_echantillon_with_excel')]
     public function addEchantillonToOrderByExcel(
-        Request $request,
-        Order $order,
-        EntityManagerInterface $manager,
-        EtatPhysiqueRepository $etatPhysiqueRepository,
+        Request                   $request,
+        Order                     $order,
+        EntityManagerInterface    $manager,
+        EtatPhysiqueRepository    $etatPhysiqueRepository,
         ConditionnementRepository $conditionnementRepository,
     ): Response
     {
@@ -180,8 +180,12 @@ class OrderController extends AbstractController
                 $echantillon = new Echantillon(); // Remplacez VotreEntite par le nom de votre entité
                 $echantillon->setEntreprise($this->getUser());
                 $echantillon->setNumberOfOrder($order);
-                $dateSampling = new \DateTime($row[0]);
-                $echantillon->setDateOfSampling($dateSampling);
+                if ($row[0] != null) {
+                    $dateSampling = new \DateTime($row[0]);
+                    $echantillon->setDateOfSampling($dateSampling);
+                } else {
+                    $echantillon->setDateOfSampling(null);
+                }
                 $echantillon->setProductName($row[1]);
                 $echantillon->setNumberOfBatch($row[2]);
                 $etatPhysique = $etatPhysiqueRepository->findOneBy(['name' => $row[3]]);
@@ -190,12 +194,24 @@ class OrderController extends AbstractController
                 $echantillon->setConditioning($conditionnement);
                 $echantillon->setTemperatureOfProduct($row[5]);
                 $echantillon->setTemperatureOfEnceinte($row[6]);
-                $dateAnalyse = new \DateTime($row[7]);
-                $echantillon->setDateAnalyse($dateAnalyse);
-                $dlcDluo = new \DateTime($row[8]);
-                $echantillon->setDlcOrDluo($dlcDluo);
-                $dateManufacturing = new \DateTime($row[9]);
-                $echantillon->setDateOfManufacturing($dateManufacturing);
+                if ($row[7] != null) {
+                    $dateAnalyse = new \DateTime($row[7]);
+                    $echantillon->setDateAnalyse($dateAnalyse);
+                } else {
+                    $echantillon->setDateAnalyse(null);
+                }
+                if ($row[8] != null) {
+                    $dlcDluo = new \DateTime($row[8]);
+                    $echantillon->setDlcOrDluo($dlcDluo);
+                } else {
+                    $echantillon->setDlcOrDluo(null);
+                }
+                if ($row[9] != null) {
+                    $dateManufacturing = new \DateTime($row[9]);
+                    $echantillon->setDateOfManufacturing($dateManufacturing);
+                } else {
+                    $echantillon->setDateOfManufacturing(null);
+                }
                 $analyseDLC = ucfirst(strtolower($row[10]));
                 if ($analyseDLC == 'Oui') {
                     $echantillon->setAnalyseDlc(true);
@@ -206,8 +222,12 @@ class OrderController extends AbstractController
                 if ($validationDLC == 'Oui') {
                     $echantillon->setValidationDlc(true);
                     $echantillon->setTempOfBreak($row[13]);
-                    $dateOfBreak = new \DateTime($row[14]);
-                    $echantillon->setDateOfBreak($dateOfBreak);
+                    if ($row[14] != null) {
+                        $dateOfBreak = new \DateTime($row[14]);
+                        $echantillon->setDateOfBreak($dateOfBreak);
+                    } else {
+                        $echantillon->setDateOfBreak(null);
+                    }
                 } else {
                     $echantillon->setValidationDlc(false);
                 }

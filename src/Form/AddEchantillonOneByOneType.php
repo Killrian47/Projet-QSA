@@ -138,12 +138,12 @@ class AddEchantillonOneByOneType extends AbstractType
             ->add('validationDlc', CheckboxType::class, [
                 'label' => 'Validation de DLC (Par LOT)',
                 'label_attr' => [
-                    'class' => 'me-2',
+                    'class' => 'me-2 validation-dlc-check-box',
                 ],
                 'required' => false,
                 'attr' => [
                     'id' => 'check_box'
-                ]
+                ],
             ])
             ->add('conditioning', EntityType::class, [
                 'class' => Conditionnement::class,

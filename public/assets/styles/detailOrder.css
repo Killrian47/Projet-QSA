@@ -1,0 +1,25 @@
+.qsa-info-imp {
+    position: relative;
+    border-bottom: 1px dotted black;
+    z-index: 2;
+}
+
+.qsa-info-imp span {
+    visibility: hidden;
+    width: 100px;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    right: 75%;
+    font-size: 1em;
+    bottom: 100%;
+    background-color: white;
+}
+
+.qsa-info-imp:hover .tooltiptext {
+    visibility: visible;
+}

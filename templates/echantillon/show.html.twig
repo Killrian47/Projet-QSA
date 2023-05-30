@@ -17,16 +17,48 @@
                     {% endif %}</td>
             </tr>
             <tr>
+                <th>Date de prélèvement</th>
+                {% if echantillon.dateOfSampling == null %}
+                    <td class="text-danger"><i class="fa-solid fa-triangle-exclamation mb-1"></i>
+                        La date de prélèvement est obligatoire
+                    </td>
+                {% endif %}
+                <td>{{ echantillon.dateOfSampling | date('d-m-Y') }}</td>
+            </tr>
+            <tr>
                 <th>Nom du produit</th>
-                <td>{{ echantillon.productName }}</td>
+                {% if echantillon.productName == null %}
+                    <td class="text-danger"><i class="fa-solid fa-triangle-exclamation mb-1"></i>
+                        Le nom du produit est obligatoire
+                    </td>
+                {% else %}
+                    <td>{{ echantillon.productName }}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>Numéro de lot</th>
                 <td>{{ echantillon.numberOfBatch }}</td>
             </tr>
             <tr>
-                <th>Fabricant</th>
-                <td>{{ echantillon.supplier }}</td>
+                <th>État physique</th>
+                {% if echantillon.etatPhysique == null %}
+                    <td class="text-danger"><i class="fa-solid fa-triangle-exclamation mb-1"></i>
+                        L'état physique du produit est obligatoire
+                    </td>
+                {% else %}
+                    <td>{{ echantillon.etatPhysique.name }}</td>
+                {% endif %}
+                <td></td>
+            </tr>
+            <tr>
+                <th>Conditionnement</th>
+                {% if echantillon.conditioning == null %}
+                    <td class="text-danger"><i class="fa-solid fa-triangle-exclamation mb-1"></i>
+                        Le conditionnement du produit est obligatoire
+                    </td>
+                {% else %}
+                    <td>{{ echantillon.conditioning.name }}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>Température du produit</th>
@@ -37,16 +69,30 @@
                 <td>{{ echantillon.temperatureOfEnceinte }}</td>
             </tr>
             <tr>
-                <th>Date de fabrication</th>
-                <td>{{ echantillon.dateOfManufacturing ? echantillon.dateOfManufacturing|date('d-m-Y') : '' }}</td>
+                <th>Date d'analyse</th>
+                {% if echantillon.dateAnalyse == null %}
+                    <td class="text-danger"><i class="fa-solid fa-triangle-exclamation mb-1"></i>
+                        La date d'analyse est obligatoire
+                    </td>
+                {% else %}
+                    <td>{{ echantillon.dateAnalyse|date('d-m-Y') }}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>DLC / DLUO</th>
-                <td>{{ echantillon.DlcOrDluo ? echantillon.DlcOrDluo|date('d-m-Y') : '' }}</td>
+                {% if echantillon.dlcOrDluo == null %}
+                    <td><i><small>Date non précisée</small></i></td>
+                {% else %}
+                    <td>{{ echantillon.dlcOrDluo | date('d-m-Y') }}</td>
+                {% endif %}
             </tr>
             <tr>
-                <th>Date de prélèvement</th>
-                <td>{{ echantillon.dateOfSampling ? echantillon.dateOfSampling|date('d-m-Y') : '' }}</td>
+                <th>Date de fabrication</th>
+                {% if echantillon.dateOfManufacturing == null %}
+                    <td><i><small>Date non précisée</small></i></td>
+                {% else %}
+                    <td>{{ echantillon.dateOfManufacturing | date('d-m-Y') }}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>Analyse à DLC ?</th>
@@ -56,17 +102,39 @@
                 <th>Validation de DLC ?</th>
                 <td>{{ echantillon.validationDlc ? 'Oui' : 'Non' }}</td>
             </tr>
+            {% if echantillon.validationDlc == true %}
+                <tr>
+                    <th>Température de rupture</th>
+                    {% if echantillon.tempOfBreak == null %}
+                        <td class="text-danger"><i class="fa-solid fa-triangle-exclamation mb-1"></i>
+                            La température de rupture est obligatoire
+                        </td>
+                    {% else %}
+                        <td>{{ echantillon.tempOfBreak }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Date de rupture</th>
+                    {% if echantillon.dateOfBreak == null %}
+                        <td class="text-danger"><i class="fa-solid fa-triangle-exclamation mb-1"></i>
+                            La date de rupture est obligatoire
+                        </td>
+                    {% else %}
+                        <td>{{ echantillon.dateOfBreak | date('d-m-Y') }}</td>
+                    {% endif %}
+                </tr>
+            {% endif %}
             <tr>
-                <th>Date d'analyse</th>
-                <td>{{ echantillon.dateAnalyse ? echantillon.dateAnalyse|date('d-m-Y') : '' }}</td>
+                <th>Fabricant</th>
+                <td>{{ echantillon.supplier }}</td>
             </tr>
             </tbody>
         </table>
-        <div class="d-flex justify-content-between py-4 px-1">
+        <div class="d-flex justify-content-between py-4 px-2">
             <a href="{{ path('app_detail_order', {id : echantillon.numberOfOrder.id }) }}">Retour au détail du bon de
                 commande</a>
             {% if app.user.id == echantillon.entreprise.id or is_granted("ROLE_ADMIN") %}
-                <a href="{{ path('app_echantillons_edit', {'id': echantillon.id}) }}">Modifier l'échantillon</a>
+                <a class="btn qsa-btn" href="{{ path('app_echantillons_edit', {'id': echantillon.id}) }}">Modifier l'échantillon</a>
             {% endif %}
         </div>
     </div>
