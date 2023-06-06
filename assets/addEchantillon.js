@@ -13,9 +13,6 @@ function checkBoxValidationDLCFunction() {
         dateOfBreak.style.display = 'block';
         dateOfBreakInput.classList.add('qsa-input-form-needed');
         tempOfBreakInput.classList.add('qsa-input-form-needed');
-        if (manufacturingInput.classList.contains('qsa-input-form-needed')) {
-
-        }
         manufacturingInput.classList.add('qsa-input-form-needed');
         dlcDluoInput.classList.add('qsa-input-form-needed');
         checkBoxAnalyseDLC.checked = true;
@@ -24,9 +21,10 @@ function checkBoxValidationDLCFunction() {
         tempOfBreak.style.display = 'none';
         dateOfBreakInput.classList.remove('qsa-input-form-needed');
         tempOfBreakInput.classList.remove('qsa-input-form-needed');
-        manufacturingInput.classList.remove('qsa-input-form-needed');
-        dlcDluoInput.classList.remove('qsa-input-form-needed');
-        checkBoxAnalyseDLC.checked = false;
+        if (checkBoxAnalyseDLC.checked !== true) {
+            manufacturingInput.classList.remove('qsa-input-form-needed');
+            dlcDluoInput.classList.remove('qsa-input-form-needed');
+        }
     }
 }
 
@@ -46,3 +44,7 @@ function checkBoxAnalyseDLCFunction() {
 
 checkBoxValidationDLC.addEventListener('click', checkBoxValidationDLCFunction);
 checkBoxAnalyseDLC.addEventListener('click', checkBoxAnalyseDLCFunction);
+document.addEventListener("DOMContentLoaded", function(event) {
+    checkBoxValidationDLCFunction();
+    checkBoxAnalyseDLCFunction();
+});

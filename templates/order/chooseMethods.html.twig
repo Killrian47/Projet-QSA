@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir la méthode d'envoi des échantillons - {{ parent() }} {% endblock %}
+
+{% block body %}
+    <div class="col-7 mx-auto d-flex justify-content-around">
+        <div class="col-4 bg-gray p-2 rounded">
+            <p><strong class="text-center">Ajouter un échantillon par un échantillon : </strong><a
+                        href="{{ path('app_order_one_by_one') }}">Cliquez ici</a></p>
+        </div>
+        <div class="col-4 bg-gray p-2 rounded">
+            <p><strong>Vous pouvez aussi importer un fichier CSV ou XLSX</strong></p>
+            <p>Voici deux model un CSV et un XLSX que vous pouvez télécharger</p>
+            <div class="d-flex flex-column mb-3">
+                <a class="btn btn-secondary mb-2" href="{{ path('app_download_csv_model') }}"><i
+                            class="fa-solid fa-download me-2"></i>Model CSV</a>
+                <a class="btn btn-secondary " href="{{ path('app_download_xlsx_model') }}"><i
+                            class="fa-solid fa-download me-2"></i>Model XLSX</a>
+            </div>
+
+            <a href="{{ path('app_order_many_by_many') }}">Ajouter des échantillons grâce à un excel</a>
+        </div>
+    </div>
+{% endblock %}
+
+
+
