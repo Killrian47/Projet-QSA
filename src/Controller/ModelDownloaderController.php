@@ -55,5 +55,28 @@ class ModelDownloaderController extends AbstractController
 
         return $response;
     }
+
+    #[Route('download/fichier-ods-model', name: 'app_download_ods_model')]
+    public function downloadOds(): BinaryFileResponse
+    {
+        // Chemin vers le fichier CSV à télécharger
+        $path = $this->getParameter('kernel.project_dir') . '/public/file_to_download/QSA_model.xlsx';
+
+        // Créer une réponse de fichier binaire
+        $response = new BinaryFileResponse($path);
+
+        // Ajouter un en-tête de réponse pour définir le type MIME du fichier
+        $response->headers->set('Content-Type', 'application/vnd.oasis.opendocument.spreadsheet');
+
+        // Forcer le téléchargement plutôt que l'affichage dans le navigateur
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'QSA_model.ods'
+        );
+
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
+    }
 }
 

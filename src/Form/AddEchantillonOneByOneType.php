@@ -40,7 +40,7 @@ class AddEchantillonOneByOneType extends AbstractType
         $builder
             ->add('productName', TextType::class, [
                 'attr' => [
-                    'class' => 'qsa-input-form rounded'
+                    'class' => 'qsa-input-form-needed rounded'
                 ],
                 'label' => 'Nom du produit :',
                 'required' => false,
@@ -94,7 +94,7 @@ class AddEchantillonOneByOneType extends AbstractType
             ->add('dateAnalyse', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'qsa-input-form rounded',
+                    'class' => 'qsa-input-form-needed rounded',
                 ],
                 'label' => 'Date d\'analyse :',
                 'required' => false,
@@ -117,7 +117,7 @@ class AddEchantillonOneByOneType extends AbstractType
             ->add('dateOfSampling', DateTimeType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'qsa-input-form rounded',
+                    'class' => 'qsa-input-form-needed rounded',
                 ],
                 'label' => 'Prélevé le ? à ?',
                 'required' => false,
@@ -148,7 +148,7 @@ class AddEchantillonOneByOneType extends AbstractType
             ->add('conditioning', EntityType::class, [
                 'class' => Conditionnement::class,
                 'attr' => [
-                    'class' => 'qsa-input-form rounded',
+                    'class' => 'qsa-input-form-needed rounded',
                 ],
                 'placeholder' => '-- Sélectionner le conditionnement --',
                 'required' => false,
@@ -163,7 +163,7 @@ class AddEchantillonOneByOneType extends AbstractType
             ->add('etatPhysique', EntityType::class, [
                 'class' => EtatPhysique::class,
                 'attr' => [
-                    'class' => 'qsa-input-form rounded',
+                    'class' => 'qsa-input-form-needed rounded',
                 ],
                 'placeholder' => '-- Sélectionner l\'état physique du produit --',
                 'required' => false,

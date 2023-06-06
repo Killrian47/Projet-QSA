@@ -21,8 +21,14 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class OrderController extends AbstractController
 {
-    #[Route('/ajouter-des-échantillons-un-par-un', name: 'app_order')]
-    public function index(EntityManagerInterface $manager): Response
+    #[Route('/choisir-la-méthode-pour-ajouter-des-échantillons', name: 'app_choose_how_to_add_echantillon')]
+    public function chooseMethod(): Response
+    {
+        return $this->render('order/chooseMethods.html.twig');
+    }
+
+    #[Route('/ajouter-des-échantillons-un-par-un', name: 'app_order_one_by_one')]
+    public function createOrderForOneByOneEchantillon(EntityManagerInterface $manager): Response
     {
         if ($this->getUser() === null) {
             $this->addFlash('info', 'Vous devez être connecté pour avoir accès à cette page');
@@ -43,12 +49,12 @@ class OrderController extends AbstractController
         $manager->persist($order);
         $manager->flush();
 
-        return $this->redirectToRoute('app_add_echantillon_to_order', [
+        return $this->redirectToRoute('app_order_one_by_one_add_echantillon', [
             'id' => $order->getId()
         ]);
     }
 
-    #[Route('/ajouter-des-échantillons-un-par-un/{id}', name: 'app_add_echantillon_to_order')]
+    #[Route('/ajouter-des-échantillons-un-par-un/{id}', name: 'app_order_one_by_one_add_echantillon')]
     public function addEchantillonsOneByOne(Request $request, Order $order, EntityManagerInterface $manager): Response
     {
         if ($this->getUser()->getId() !== $order->getEntreprise()->getId()) {
@@ -86,14 +92,14 @@ class OrderController extends AbstractController
 
             if ($dateDlc < $dateF) {
                 $this->addFlash('danger', 'La date de DLC ne peut pas être plus ancienne que la date de fabrication');
-                return $this->redirectToRoute('app_add_echantillon_to_order', [
+                return $this->redirectToRoute('app_order_one_by_one_add_echantillon', [
                     'id' => $order->getId()
                 ]);
             }
 
             if ($dateAnalyse < $dateF) {
                 $this->addFlash('danger', 'La date d\'analyse ne peut pas être plus ancienne que la date de fabrication');
-                return $this->redirectToRoute('app_detail_order', [
+                return $this->redirectToRoute('app_order_one_by_one_add_echantillon', [
                     'id' => $order->getId()
                 ]);
             }
@@ -102,7 +108,7 @@ class OrderController extends AbstractController
             $manager->flush();
 
             $this->addFlash('success', 'L\'échantillon vient d\'être enregistré !');
-            return $this->redirectToRoute('app_add_echantillon_to_order', [
+            return $this->redirectToRoute('app_order_one_by_one_add_echantillon', [
                 'id' => $order->getId()
             ]);
         }
@@ -112,8 +118,8 @@ class OrderController extends AbstractController
         ]);
     }
 
-    #[Route('/ajouter-plusieurs-échantillons', name: 'app_add_many_echantillon')]
-    public function addEchantillonByExcel(EntityManagerInterface $manager): Response
+    #[Route('/ajouter-plusieurs-échantillons', name: 'app_order_many_by_many')]
+    public function createOrderForManyEchantillons(EntityManagerInterface $manager): Response
     {
         if ($this->getUser() === null) {
             $this->addFlash('info', 'Vous devez être connecté pour avoir accès à cette page');
@@ -134,7 +140,7 @@ class OrderController extends AbstractController
         $manager->persist($order);
         $manager->flush();
 
-        return $this->redirectToRoute('app_add_echantillon_with_excel', [
+        return $this->redirectToRoute('app_order_many_by_many_add_echantillon', [
             'id' => $order->getId()
         ]);
     }
@@ -143,7 +149,7 @@ class OrderController extends AbstractController
      * @throws Exception
      * @throws \Exception
      */
-    #[Route('/ajouter-plusieurs-échantillons/{id}', name: 'app_add_echantillon_with_excel')]
+    #[Route('/ajouter-plusieurs-échantillons/{id}', name: 'app_order_many_by_many_add_echantillon')]
     public function addEchantillonToOrderByExcel(
         Request                   $request,
         Order                     $order,

@@ -11,4 +11,5 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 import './header';
+import './addEchantillon';
 
