@@ -49,9 +49,9 @@
 
                     <p>Vous avez envoyé <strong>{{ counterForEchantillon }}</strong> échantillons</p>
                     <p>A été récupéré par QSA ? {% if order.isExported == 0 %}
-                            Non
+                            <strong class="text-danger">Non</strong>
                         {% else %}
-                            Oui
+                            <strong class="text-success">Oui</strong>
                         {% endif %}</p>
                     <p>Vous avez créé ce bon de commande le :
                         <br><strong>{{ order.createdAt | date('d-m-Y') }}</strong>

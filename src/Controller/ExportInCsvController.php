@@ -30,50 +30,48 @@ class ExportInCsvController extends AbstractController
         $sheet = $calc->getActiveSheet();
 
         $sheet->setTitle('Échantillons');
-        $sheet->setCellValue('A1', 'Numéro de lot');
+        $sheet->setCellValue('A1', 'Date de prélèvement');
         $sheet->setCellValue('B1', 'Nom du produit');
-        $sheet->setCellValue('C1', 'Fournisseur');
-        $sheet->setCellValue('D1', 'Température du produit');
-        $sheet->setCellValue('E1', 'Température de l\'enceinte');
-        $sheet->setCellValue('F1', 'Date de fabrication');
-        $sheet->setCellValue('G1', 'DLC / DLUO');
-        $sheet->setCellValue('H1', 'Date de prélèvement');
-        $sheet->setCellValue('I1', 'Analyse à DLC ?');
-        $sheet->setCellValue('J1', 'Validation de DLC ?');
-        $sheet->setCellValue('K1', 'Conditionnement');
-        $sheet->setCellValue('L1', 'État physique');
-        $sheet->setCellValue('M1', 'Lieu');
-        $sheet->setCellValue('N1', 'Stockage');
-        $sheet->setCellValue('O1', 'Analyse');
-        $sheet->setCellValue('P1', 'Prélevé par ?');
+        $sheet->setCellValue('C1', 'Numéro de lot');
+        $sheet->setCellValue('D1', 'État physique');
+        $sheet->setCellValue('E1', 'Conditionnement');
+        $sheet->setCellValue('F1', 'Température du produit');
+        $sheet->setCellValue('G1', 'Température de l\'enceinte');
+        $sheet->setCellValue('H1', 'Date de d\'analyse');
+        $sheet->setCellValue('I1', 'DLC / DLUO');
+        $sheet->setCellValue('J1', 'Date de fabrication');
+        $sheet->setCellValue('K1', 'Analyse à DLC ?');
+        $sheet->setCellValue('L1', 'Validation de DLC ?');
+        $sheet->setCellValue('N1', 'Température de rupture');
+        $sheet->setCellValue('O1', 'Date de rupture');
+        $sheet->setCellValue('P1', 'Fournisseur');
 
         $row = 2;
         $entreprise = '';
         foreach ($data as $item) {
-            $sheet->setCellValue('A' . $row, $item->getNumberOfBatch());
+            $sheet->setCellValue('A' . $row, $item->getDateOfSampling());
             $sheet->setCellValue('B' . $row, $item->getProductName());
-            $sheet->setCellValue('C' . $row, $item->getSupplier());
-            $sheet->setCellValue('D' . $row, $item->getTemperatureOfProduct());
-            $sheet->setCellValue('E' . $row, $item->getTemperatureOfEnceinte());
-            $sheet->setCellValue('F' . $row, $item->getDateOfManufacturing());
-            $sheet->setCellValue('G' . $row, $item->getDlcOrDluo());
+            $sheet->setCellValue('C' . $row, $item->getNumberOfBatch());
+            $sheet->setCellValue('D' . $row, $item->getEtatPhysique()->getName());
+            $sheet->setCellValue('E' . $row, $item->getConditioning()->getName());
+            $sheet->setCellValue('F' . $row, $item->getTemperatureOfProduct());
+            $sheet->setCellValue('G' . $row, $item->getTemperatureOfEnceinte());
             $sheet->setCellValue('H' . $row, $item->getDateOfSampling());
+            $sheet->setCellValue('I' . $row, $item->getDlcOrDluo());
+            $sheet->setCellValue('J' . $row, $item->getDateOfManufacturing());
             if ($item->isAnalyseDlc() === TRUE) {
-                $sheet->setCellValue('I' . $row, 'Oui');
+                $sheet->setCellValue('K' . $row, 'Oui');
             } else {
-                $sheet->setCellValue('I' . $row, 'Non');
+                $sheet->setCellValue('K' . $row, 'Non');
             }
             if ($item->isValidationDlc() === TRUE) {
-                $sheet->setCellValue('J' . $row, 'Oui');
+                $sheet->setCellValue('L' . $row, 'Oui');
             } else {
-                $sheet->setCellValue('J' . $row, 'Non');
+                $sheet->setCellValue('L' . $row, 'Non');
             }
-            $sheet->setCellValue('K' . $row, $item->getConditioning()->getName());
-            $sheet->setCellValue('L' . $row, $item->getEtatPhysique()->getName());
-            $sheet->setCellValue('M' . $row, $item->getLieu()->getName());
-            $sheet->setCellValue('N' . $row, $item->getStockage()->getName());
-            $sheet->setCellValue('O' . $row, $item->getAnalyse()->getName());
-            $sheet->setCellValue('P' . $row, $item->getSamplingBy()->getName());
+            $sheet->setCellValue('N' . $row, $item->getTempOfBreak());
+            $sheet->setCellValue('O' . $row, $item->getDateOfBreak());
+            $sheet->setCellValue('P' . $row, $item->getSupplier());
             $entreprise = $item->getEntreprise()->getName();
             $row++;
         }

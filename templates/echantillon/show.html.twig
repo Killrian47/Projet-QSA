@@ -22,8 +22,9 @@
                     <td class="text-danger"><i class="fa-solid fa-triangle-exclamation mb-1"></i>
                         La date de prélèvement est obligatoire
                     </td>
+                {% else %}
+                    <td>{{ echantillon.dateOfSampling | date('d-m-Y') }}</td>
                 {% endif %}
-                <td>{{ echantillon.dateOfSampling | date('d-m-Y') }}</td>
             </tr>
             <tr>
                 <th>Nom du produit</th>
@@ -48,7 +49,6 @@
                 {% else %}
                     <td>{{ echantillon.etatPhysique.name }}</td>
                 {% endif %}
-                <td></td>
             </tr>
             <tr>
                 <th>Conditionnement</th>
@@ -134,7 +134,8 @@
             <a href="{{ path('app_detail_order', {id : echantillon.numberOfOrder.id }) }}">Retour au détail du bon de
                 commande</a>
             {% if app.user.id == echantillon.entreprise.id or is_granted("ROLE_ADMIN") %}
-                <a class="btn qsa-btn" href="{{ path('app_echantillons_edit', {'id': echantillon.id}) }}">Modifier l'échantillon</a>
+                <a class="btn qsa-btn" href="{{ path('app_echantillons_edit', {'id': echantillon.id}) }}">Modifier
+                    l'échantillon</a>
             {% endif %}
         </div>
     </div>

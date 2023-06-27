@@ -70,7 +70,7 @@
                         <a href="{{ path('app_home') }}" class="qsa-link-header">
                             <li class="p-2 qsa-link">Toutes vos analyses</li>
                         </a>
-                        <a href="{{ path('app_order') }}" class="qsa-link-header qsa-link-header-1">
+                        <a href="{{ path('app_choose_how_to_add_echantillon') }}" class="qsa-link-header qsa-link-header-1">
                             <li class="p-2 qsa-link">Envoyer de nouvelles analyse</li>
                         </a>
                     {% endif %}
@@ -82,8 +82,9 @@
                     </a>
                 </ul>
             {% endif %}
+            {% include '_includes/letters.html.twig' %}
         </div>
-        {% include '_includes/letters.html.twig' %}
+
     </header>
     <div class="qsa-fake-header col-12"></div>
 {% endblock %}
@@ -96,26 +97,26 @@
 
     {% if entreprises is defined %}
         {% if entreprises is not empty %}
-            <div>
-                <h2>Résultat pour votre recherche "{% if search is defined %}
+            <div class="w-75 mx-auto p-2">
+                <h2 class="text-center">Résultat pour votre recherche "{% if search is defined %}
                         {{ search }}
                     {% endif %}"
                 </h2>
-                <hr class="sep w-50">
-                <div class="list-entreprise">
+                <hr class="sep">
+                <div class="list-entreprise ">
                     {% for entreprise in entreprises %}
-                        <div class="entreprise-container">
-                            <div class="d-flex justify-content-between">
+                        <div class="qsa-border qsa-radius background-gray mb-4">
+                            <div class="d-flex justify-content-between p-3">
                                 <h4>Nom de l'entreprise : {{ entreprise.name }}</h4>
 
-                                <a href="{{ path('app_entreprise', {'id': entreprise.id}) }}">Détail de l'entreprise</a>
+                                <a href="{{ path('app_detail_entreprise', {'id': entreprise.id}) }}">Détail de l'entreprise</a>
                             </div>
                             <div class="order-of-entreprise">
-                                <h5>Bon de commande :</h5>
+                                <h6 class="p-3">Les 5 derniers bons de commandes de cette entreprise :</h6>
                                 {% set counter = 0 %}
                                 {% if entreprise.orders is not empty %}
 
-                                    <table class="table">
+                                    <table class="table qsa-border mb-0">
                                         <thead>
                                         <tr>
                                             <th scope="col">Numéro bon de commande</th>
