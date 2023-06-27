@@ -70,7 +70,7 @@
                         <a href="{{ path('app_home') }}" class="qsa-link-header">
                             <li class="p-2 qsa-link">Toutes vos analyses</li>
                         </a>
-                        <a href="{{ path('app_order') }}" class="qsa-link-header qsa-link-header-1">
+                        <a href="{{ path('app_choose_how_to_add_echantillon') }}" class="qsa-link-header qsa-link-header-1">
                             <li class="p-2 qsa-link">Envoyer de nouvelles analyse</li>
                         </a>
                     {% endif %}
@@ -82,8 +82,8 @@
                     </a>
                 </ul>
             {% endif %}
+            {% include '_includes/letters.html.twig' %}
         </div>
-        {% include '_includes/letters.html.twig' %}
     </header>
     <div class="qsa-fake-header col-12 mb-10"></div>
 {% endblock %}

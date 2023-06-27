@@ -14,7 +14,7 @@ class ModelDownloaderController extends AbstractController
     public function downloadXlsx(): BinaryFileResponse
     {
         // Chemin vers le fichier XLSX à télécharger
-        $path = $this->getParameter('kernel.project_dir') . '/public/file_to_download/QSA_model.xlsx';
+        $path = $this->getParameter('kernel.project_dir') . '/public/file_to_download/Model_QSA.ods';
 
         // Créer une réponse de fichier binaire
         $response = new BinaryFileResponse($path);
@@ -37,7 +37,7 @@ class ModelDownloaderController extends AbstractController
     public function downloadCsv(): BinaryFileResponse
     {
         // Chemin vers le fichier CSV à télécharger
-        $path = $this->getParameter('kernel.project_dir') . '/public/file_to_download/QSA_model.xlsx';
+        $path = $this->getParameter('kernel.project_dir') . '/public/file_to_download/Model_QSA.ods';
 
         // Créer une réponse de fichier binaire
         $response = new BinaryFileResponse($path);
@@ -60,7 +60,7 @@ class ModelDownloaderController extends AbstractController
     public function downloadOds(): BinaryFileResponse
     {
         // Chemin vers le fichier CSV à télécharger
-        $path = $this->getParameter('kernel.project_dir') . '/public/file_to_download/QSA_model.xlsx';
+        $path = $this->getParameter('kernel.project_dir') . '/public/file_to_download/Model_QSA.ods';
 
         // Créer une réponse de fichier binaire
         $response = new BinaryFileResponse($path);

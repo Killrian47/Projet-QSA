@@ -24,6 +24,45 @@ class EchantillonController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $dateF = $form->get('dateOfManufacturing')->getData();
+            $dateDlc = $form->get('DlcOrDluo')->getData();
+            $dateAnalyse = $form->get('dateAnalyse')->getData();
+
+            if ($dateDlc < $dateF) {
+                $this->addFlash('danger', 'La date de DLC ne peut pas être plus ancienne que la date de fabrication');
+                return $this->redirectToRoute('app_echantillons_edit', [
+                    'id' => $echantillon->getId()
+                ]);
+            }
+
+            if ($dateAnalyse < $dateF) {
+                $this->addFlash('danger', 'La date d\'analyse ne peut pas être plus ancienne que la date de fabrication');
+                return $this->redirectToRoute('app_echantillons_edit', [
+                    'id' => $echantillon->getId()
+                ]);
+            }
+
+            if ($form->get('analyseDlc')->getData() === true) {
+                if ($dateF === null || $dateDlc === null) {
+                    $this->addFlash('danger', 'Vous devez saisir la date de fabrication ainsi que la DLC ou DLUO !');
+                    return $this->redirectToRoute('app_echantillons_edit', [
+                        'id' => $echantillon->getId(),
+                    ]);
+                }
+            }
+
+            if ($form->get('validationDlc')->getData() === true) {
+                if ($form->get('dateOfBreak')->getData() === null || $form->get('tempOfBreak')->getData() === null) {
+                    $this->addFlash('danger', 'Vous devez saisir une température de rupture et une date de rupture !');
+                    return $this->redirectToRoute('app_echantillons_edit', [
+                        'id' => $echantillon->getId(),
+                    ]);
+                } else {
+                    $echantillon->setDateOfBreak($form->get('dateOfBreak')->getData());
+                    $echantillon->setTempOfBreak($form->get('tempOfBreak')->getData());
+                }
+            }
+
             $echantillonRepository->save($echantillon, true);
             $this->addFlash('success', 'Votre échantillon vient d\'être modifier !');
 

@@ -82,8 +82,8 @@
                     </a>
                 </ul>
             {% endif %}
+            {% include '_includes/letters.html.twig' %}
         </div>
-        {% include '_includes/letters.html.twig' %}
     </header>
     <div class="qsa-fake-header col-12"></div>
 {% endblock %}
@@ -94,22 +94,22 @@
         {% include '_includes/searchBar.html.twig' %}
     </div>
 
-    <div class="col-lg-10 mx-auto">
+    <div class="w-75 mx-auto">
         {% if orders is defined %}
             {% if orders is not empty %}
                 <div>
-                    <h2>Commandes créées entre le {{ date1 | date('d-m-Y') }} et le {% if date2 is defined %}
+                    <h2 class="text-center">Commandes créées entre le {{ date1 | date('d-m-Y') }} et le {% if date2 is defined %}
                             {{ date2 | date('d-m-Y') }}
                         {% endif %} par des entreprises ayant " {{ search }} " dans leur nom
                     </h2>
-                    <hr class="w-50 sep">
-                    <div class="list-entreprise">
+                    <hr class="sep">
+                    <div class="list-entreprise ">
                         {% for order in orders %}
-                            <div class="entreprise-container">
-                                <h5>Bon de commande numéro {{ order.id }}</h5>
+                            <div class="qsa-border qsa-radius background-gray mb-3">
+                                <h5 class="p-3">Bon de commande numéro : {{ order.id }}</h5>
 
                                 <div class="order-of-entreprise">
-                                    <table class="table">
+                                    <table class="table mb-0 qsa-border">
                                         <thead>
                                         <tr>
                                             <th scope="col">Nombre d'échantillons</th>

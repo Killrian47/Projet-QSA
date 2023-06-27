@@ -4,8 +4,9 @@
 
 {% block body %}
     <div class="detail-order-container w-75 mx-auto background-gray qsa-radius">
-        <h1 class="text-center mb-3">Bon de commande numéro {{ order.id }}</h1>
+        <h1 class="text-center mb-3 pt-2">Bon de commande numéro {{ order.id }}</h1>
         <p class="text-end me-3"><a href="{{ path('app_home') }}">Retour à l'accueil</a></p>
+        <p class="ms-2 text-danger text-center"><strong>Si il manque des informations sur vos échantillons, ils ne pourront pas être récupérés par QSA</strong></p>
 
         <table class="table qsa-border qsa-table">
             <thead>

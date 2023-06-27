@@ -24,6 +24,16 @@ class OrderController extends AbstractController
     #[Route('/choisir-la-méthode-pour-ajouter-des-échantillons', name: 'app_choose_how_to_add_echantillon')]
     public function chooseMethod(): Response
     {
+        if ($this->getUser() === null) {
+            $this->addFlash('info', 'Vous devez être connecté pour avoir accès à cette page');
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($this->getUser()->isFirstConnection() === true) {
+            $this->addFlash('warning', 'Vous devez changer votre mot de passe avant de pouvoir naviguer sur le site');
+            return $this->redirectToRoute('app_change_password');
+        }
+
         return $this->render('order/chooseMethods.html.twig');
     }
 
@@ -77,13 +87,11 @@ class OrderController extends AbstractController
             $echantillon->setDateOfManufacturing($form->get('dateOfManufacturing')->getData());
             $echantillon->setDlcOrDluo($form->get('DlcOrDluo')->getData());
             $echantillon->setDateOfSampling($form->get('dateOfSampling')->getData());
-            $echantillon->setDateAnalyse($form->getData()['dateAnalyse']);
+            $echantillon->setDateAnalyse($form->get('dateAnalyse')->getData());
             $echantillon->setAnalyseDlc($form->get('analyseDlc')->getData());
             $echantillon->setValidationDlc($form->get('validationDlc')->getData());
             $echantillon->setConditioning($form->get('conditioning')->getData());
             $echantillon->setEtatPhysique($form->get('etatPhysique')->getData());
-            $echantillon->setLieu($form->get('Lieu')->getData());
-            $echantillon->setStockage($form->get('stockage')->getData());
             $echantillon->setAnalyse($form->get('analyse')->getData());
             $echantillon->setSamplingBy($form->get('samplingBy')->getData());
             $dateF = $form->get('dateOfManufacturing')->getData();
@@ -102,6 +110,27 @@ class OrderController extends AbstractController
                 return $this->redirectToRoute('app_order_one_by_one_add_echantillon', [
                     'id' => $order->getId()
                 ]);
+            }
+
+            if ($form->get('analyseDlc')->getData() === true) {
+                if ($dateF === null || $dateDlc === null) {
+                    $this->addFlash('danger', 'Vous devez saisir la date de fabrication ainsi que la DLC ou DLUO !');
+                    return $this->redirectToRoute('app_order_one_by_one_add_echantillon', [
+                        'id' => $order->getId(),
+                    ]);
+                }
+            }
+
+            if ($form->get('validationDlc')->getData() === true) {
+                if ($form->get('dateOfBreak')->getData() === null || $form->get('tempOfBreak')->getData() === null) {
+                    $this->addFlash('danger', 'Vous devez saisir une température de rupture et une date de rupture !');
+                    return $this->redirectToRoute('app_order_one_by_one_add_echantillon', [
+                        'id' => $order->getId(),
+                    ]);
+                } else {
+                    $echantillon->setDateOfBreak($form->get('dateOfBreak')->getData());
+                    $echantillon->setTempOfBreak($form->get('tempOfBreak')->getData());
+                }
             }
 
             $manager->persist($echantillon);
